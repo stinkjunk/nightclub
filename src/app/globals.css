@@ -22,7 +22,8 @@
 } */
 
 .pattern-sm {
-  background-image: url("../assets/bg/pattern_small.jpg");
+  /* background-image: url("../../public/assets/bg/pattern_small.jpg"); */
+  background-image: url("/assets/bg/pattern_small.jpg");
   background-size: 2%;
 }
 
