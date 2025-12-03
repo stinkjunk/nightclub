@@ -5,6 +5,7 @@
   --bg: #000000;
 
   --active: #ff2a70;
+  --headerHeight: 11vh;
 }
 
 @theme inline {
@@ -39,4 +40,47 @@ body {
 
 .bgActive {
   background-color: var(--active);
+}
+
+.isCurrentPage {
+  color: var(--active);
+
+  /* This is incredibly painful*/
+  /* background-image: url("/assets/bottom_line2.png");
+  &::before {
+    content: "";
+    overflow: visible;
+    position: absolute;
+    width: 15vw;
+    height: 2ch;
+    transform: translateY(120%) translateX(-50%);
+    background-image: url("/assets/bottom_line2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  } */
+}
+
+.pinkLine {
+  outline: 3px solid var(--active);
+  position: relative;
+  overflow: hidden;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background: var(--active);
+  }
+  &::after {
+    top: 0;
+    left: 0;
+    transform: translateX(-70%) translateY(-70%) rotate(45deg);
+  }
+  &::before {
+    bottom: 0;
+    right: 0;
+    transform: translateX(70%) translateY(70%) rotate(45deg);
+  }
 }
