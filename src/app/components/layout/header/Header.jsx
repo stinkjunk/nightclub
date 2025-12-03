@@ -10,7 +10,7 @@ export default function Header() {
       //for future reference, make px dynamic based on screen size
       className="h-[var(--headerHeight)] sticky top-0 z-50"
     >
-      <div className="pinkLine h-full  bg-black/[.9] flex px-40 justify-between">
+      <div className="pinkLine h-full  bg-black/[.9] flex px-5 lg:px-20 xl:px-40 justify-between">
         <Link href="/">
           <Image
             src="/assets/icon/Logo_main.svg"
