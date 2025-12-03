@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 
+
 export default function Header() {
   return (
     <header
@@ -22,6 +23,7 @@ export default function Header() {
         </Link>
         <Navbar />
       </div>
+
     </header>
   );
 }

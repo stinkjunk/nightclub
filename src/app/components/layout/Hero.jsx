@@ -14,7 +14,7 @@ export default function Hero() {
         bg-red-500 w-full
         "
         >
-          <p className="text-7xl mb-auto">
+          <p className="text-5xl mb-auto">
             Dummy Hero Component {"(Conditional)"}
           </p>
         </section>

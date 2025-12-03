@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Burger from "./Burger";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,6 +37,9 @@ export default function Navbar() {
         </li>
       </ul>
     </nav>
+    <Burger
+    sentClass="md:hidden"
+    />
   </>
   );
 }
