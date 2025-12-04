@@ -54,7 +54,11 @@ export default function Hero() {
                 <p className="w-full flex justify-between text-[3cqw] xl:text-[2cqw]">
                   {"HAVE A GOOD TIME".split("").map((letter, i) => (
                     // <span key={i}>{letter}</span>
-                    <span key={i}>{letter === " " ? "\u00A0" : letter}</span>
+                    <span 
+                    key={i}
+                    // className="text-shadow-[0_0_16px_0px_#000000]"
+                    className="text-shadow-lg"
+                    >{letter === " " ? "\u00A0" : letter}</span>
                   ))}
                 </p>
                 <Image
