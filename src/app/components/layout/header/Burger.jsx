@@ -4,6 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useEffect } from "react";
 
+import { motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
+
 export default function Burger(props) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,44 +40,49 @@ export default function Burger(props) {
       >
         <FaBars className="h-full w-full" />
       </button>
-      {isOpen && (
-        <div
-          className={`${props.sentClass} absolute fixed top-0 left-0 w-screen h-screen grid grid-cols-[1fr_5fr_1fr] bg-black/[.9] z-50`}
-        >
-          <nav className="col-start-2 h-full justify-center flex flex-col justify-center">
-            <ul className="flex flex-col items-center gap-8 pb-20">
-              <li>
-                <Link href="/" className="uppercase text-xl">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/book_table" className="uppercase text-xl">
-                  Book Table
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="uppercase text-xl">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact_us" className="uppercase text-xl">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </nav>
-          <div className="col-start-3 flex flex-col items-center">
-            <button
-              onClick={() => setIsOpen(!true)}
-              className="w-8 h-8 mt-3 cursor-pointer"
-            >
-              <FaXmark className="w-full h-full" />
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence> {/*tillader elementer at blive i dom'en selv efter hook (isOpen) er opdateret indtil exit animation er færdig*/}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`${props.sentClass} absolute fixed top-0 left-0 w-screen h-screen grid grid-cols-[1fr_5fr_1fr] bg-black/[.9] z-50`}
+          >
+            <nav className="col-start-2 h-full justify-center flex flex-col justify-center">
+              <ul className="flex flex-col items-center gap-8 pb-20">
+                <li>
+                  <Link href="/" className="uppercase text-xl">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/book_table" className="uppercase text-xl">
+                    Book Table
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="uppercase text-xl">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact_us" className="uppercase text-xl">
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+            <div className="col-start-3 flex flex-col items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-8 h-8 mt-3 cursor-pointer"
+              >
+                <FaXmark className="w-full h-full" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
