@@ -13,6 +13,9 @@ export default function Burger(props) {
     window.addEventListener("resize", scrollLock);
     function scrollLock() {
       const isMobile = window.matchMedia("(max-width: 768px)").matches; //768 px er tailwinds md breakpoint
+      //Teknisk set er isMobile væk fra tailwinds md breakpoint på en ~subpixel niveau, så der en miniskul ø, hvor isMobile er false
+      //mens UI stadig renderer mobile menuen. Men igen, nok subpixel niveau - skal vitterligt koncentrere mig på at skalere browser vinduet
+      //helt perfekt for at ramme buggen
       if (isOpen && isMobile) {
         document.body.style.overflow = "hidden";
       } else {
@@ -23,7 +26,7 @@ export default function Burger(props) {
     // if (isOpen) {
     //   scrollLock();
     // }
-    scrollLock(); //ovenover kalder ikke funktionen - men da [isOpen] defineres i useEffect, vil den køre ved ændring af isOpen
+    scrollLock(); //ovenover kalder ikke funktionen efter isOpen først opdateres - men da [isOpen] defineres i useEffect, vil den køre ved ændring af isOpen
   }, [isOpen]);
 
   return (
