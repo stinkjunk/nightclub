@@ -5,7 +5,7 @@ import Title from "@/app/components/global/Title";
 export default function Welcome() {
     return (
         <section
-        className="w-full h-screen"
+        className="w-full h-screen pattern-sm"
         >
             <Title title="Welcome in NightClub" />
         </section>

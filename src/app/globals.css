@@ -88,3 +88,11 @@ body {
     transform: translateX(70%) translateY(70%) rotate(45deg);
   }
 }
+
+.pageHeadline {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+    url("/assets/bg/footerbg.jpg");
+  background-size: cover;
+  background-position: center;
+}
