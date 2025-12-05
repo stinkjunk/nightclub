@@ -21,8 +21,8 @@ export default function Navbar() {
           <li>
             <Link
               href="/"
-              className={`uppercase text-xl ${
-                pathname == "/" ? "isCurrentPage" : ""
+              className={`uppercase text-xl transition-colors duration-200 ${
+                pathname == "/" ? "isCurrentPage" : "hover:text-[var(--active)]"
               }`}
             >
               Home
@@ -44,8 +44,8 @@ export default function Navbar() {
           <li>
             <Link
               href="/book_table"
-              className={`uppercase text-xl ${
-                pathname == "/book_table" ? "isCurrentPage" : ""
+              className={`uppercase text-xl transition-colors duration-200 ${
+                pathname == "/book_table" ? "isCurrentPage" : "hover:text-[var(--active)]"
               }`}
             >
               Book Table
@@ -69,8 +69,8 @@ export default function Navbar() {
           <li>
             <Link
               href="/blog"
-              className={`uppercase text-xl ${
-                pathname == "/blog" ? "isCurrentPage" : ""
+              className={`uppercase text-xl transition-colors duration-200 ${
+                pathname == "/blog" ? "isCurrentPage" : "hover:text-[var(--active)]"
               }`}
             >
               Blog
@@ -94,8 +94,8 @@ export default function Navbar() {
           <li>
             <Link
               href="/contact_us"
-              className={`uppercase text-xl ${
-                pathname == "/contact_us" ? "isCurrentPage" : ""
+              className={`uppercase text-xl transition-colors duration-200 ${
+                pathname == "/contact_us" ? "isCurrentPage" : "hover:text-[var(--active)]"
               }`}
             >
               Contact Us
@@ -109,7 +109,7 @@ export default function Navbar() {
                     alt="Underline"
                     width={150}
                     height={12}
-                    className="absolute -translate-x-1/2 w-fit"
+                    className="absolute -translate-x-1/2"
                   />
                 </div>
               </div>

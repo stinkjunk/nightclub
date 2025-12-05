@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 export default function WelcomeCard(props) {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className={`grid relative ${props.sentClass}`}>
+    <div className={`grid relative h-full ${props.sentClass}`}>
       <Image
         src={props.src}
         alt="Image"
@@ -16,10 +16,15 @@ export default function WelcomeCard(props) {
       ></Image>
       <motion.div
         className="hoverPinkLine 
-        col-start-1 row-start-1 h-full
+        col-start-1 row-start-1
         h-full flex grid grid-rows-[1fr_1fr]
         gap-5
         overflow-hidden
+        h-150
+        aspect-[4/5]
+        md:h-full
+        md:aspect-auto
+
         "
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
@@ -29,9 +34,9 @@ export default function WelcomeCard(props) {
         // whileHover={{ opacity: 1 }}
         // transition={{ duration: 0.2 }}
       >
-        <div className="w-full flex items-end justify-center">
+        <div className="w-full flex items-end justify-center pt-10">
           <motion.div
-            animate={{ scale: isHovered ? 1 : 0 }}
+            animate={{ scale: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.2 }}
             className="border-3 border-[var(--active)] rounded-lg relative
             w-20 h-20 
@@ -42,9 +47,27 @@ export default function WelcomeCard(props) {
             {props.children}
           </motion.div>
         </div>
-        <div className="w-full">
-          <p className="text-xl uppercase w-full text-center">{props.title}</p>
-          <p className="px-20 py-10 w-full">{props.description}</p>
+        <div className="w-full overflow-hidden">
+          <motion.p
+            className="text-xl uppercase w-full text-center"
+            animate={{ scale: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {props.title}
+          </motion.p>
+          <motion.p
+            className="w-full
+            xl:px-20 xl:py-10
+            px-10 py-5
+
+            "
+            animate={{ x: isHovered ? 0 : 100, opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 1 }}
+          >
+            {/* slide in from right and fade in */}
+
+            {props.description}
+          </motion.p>
         </div>
       </motion.div>
     </div>
