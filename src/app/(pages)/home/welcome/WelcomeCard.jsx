@@ -1,18 +1,11 @@
 "use client"; //For motion
+import { useState } from "react";
 
 import Image from "next/image";
 import { motion } from "motion/react";
 
 export default function WelcomeCard(props) {
-  const parentVariants = {
-    initial: { opacity: 0 },
-    hover: { opacity: 1, transition: { duration: 0.2 } }, //store state
-  };
-  const iconAnimation = {
-    initial: { scale: 0 },
-    hover: { scale: 1, transition: { duration: 0.5 } },
-  };
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className={`grid relative ${props.sentClass}`}>
       <Image
@@ -28,21 +21,18 @@ export default function WelcomeCard(props) {
         gap-5
         overflow-hidden
         "
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
         // initial={{ opacity: 0 }}
         // whileHover={{ opacity: 1 }}
         // transition={{ duration: 0.2 }}
-        variants={parentVariants}
-        initial="initial"
-        whileHover="hover"
       >
-        <motion.div
-          className="w-full flex items-end justify-center"
-          variants={{ initial: {}, hover: {} }}
-          initial="initial"
-          //intermediate "carrier" motion div - doesn't need to animate, but is needed for the children to animate
-        >
+        <div className="w-full flex items-end justify-center">
           <motion.div
-            variants={iconAnimation} //when the parent switches to "hover", all children with a matching variant key "hover" animate automatically
+            animate={{ scale: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
             className="border-3 border-[var(--active)] rounded-lg relative
             w-20 h-20 
             md:w-25 md:h-25 
@@ -51,17 +41,12 @@ export default function WelcomeCard(props) {
           >
             {props.children}
           </motion.div>
-        </motion.div>
-        <motion.div className="w-full">
-          <motion.p className="text-xl uppercase w-full text-center">
-            {props.title}
-          </motion.p>
-          <motion.p className="px-20 py-10 w-full">
-            {props.description}
-          </motion.p>
-        </motion.div>
+        </div>
+        <div className="w-full">
+          <p className="text-xl uppercase w-full text-center">{props.title}</p>
+          <p className="px-20 py-10 w-full">{props.description}</p>
+        </div>
       </motion.div>
     </div>
   );
 }
-
