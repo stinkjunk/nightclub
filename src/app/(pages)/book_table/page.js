@@ -5,5 +5,7 @@ export default function BookTable() {
     <main>
       <PageHeadline title="Book Table" />
     </main>
+
+    
   );
 }

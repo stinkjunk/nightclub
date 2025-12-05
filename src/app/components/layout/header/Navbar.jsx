@@ -109,7 +109,7 @@ export default function Navbar() {
                     alt="Underline"
                     width={150}
                     height={12}
-                    className="absolute -translate-x-1/2"
+                    className="absolute -translate-x-1/2 w-fit"
                   />
                 </div>
               </div>

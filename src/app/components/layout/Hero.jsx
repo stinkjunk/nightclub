@@ -14,7 +14,7 @@ export default function Hero() {
         : "/assets/bg/header_bg_2.jpg"; //per default genererer Math.random() et tilfældigt
     //decimal tal mellem 0 og 1 - så der er 50% chance for hver herobillede at blive valgt
     console.log(heroImg);
-    // const MotionImage = motion(Image);
+    // const MotionImage = motion(Image); 
     return (
       <>
         <section
