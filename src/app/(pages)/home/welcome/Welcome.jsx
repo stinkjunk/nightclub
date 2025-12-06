@@ -8,7 +8,7 @@ import { TbGlassCocktail } from "react-icons/tb";
 
 export default function Welcome() {
   return (
-    <section className="w-full min-h-screen xl:h-screen pattern-sm flex flex-col items-center">
+    <section className="w-full min-h-screen 2xl:h-screen pattern-sm flex flex-col items-center">
       <Title title="Welcome in NightClub" />
 
       <div

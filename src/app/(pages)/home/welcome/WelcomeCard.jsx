@@ -62,7 +62,7 @@ export default function WelcomeCard(props) {
 
             "
             animate={{ x: isHovered ? 0 : 100, opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.5 }}
           >
             {/* slide in from right and fade in */}
 
