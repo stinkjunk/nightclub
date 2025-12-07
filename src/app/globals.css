@@ -124,6 +124,32 @@ body {
     aspect-ratio: 1/1;
     background: var(--active);
   }
+  
+  &::after {
+    top: 0;
+    left: 0;
+    transform: translateX(-70%) translateY(-70%) rotate(45deg);
+  }
+  &::before {
+    bottom: 0;
+    right: 0;
+
+    transform: translateX(70%) translateY(70%) rotate(45deg);
+  }
+}
+
+.currentTrack {
+  position: relative;
+  overflow: hidden;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    height: 50%;
+    aspect-ratio: 1/1;
+    background: var(--active);
+  }
+  
   &::after {
     top: 0;
     left: 0;
