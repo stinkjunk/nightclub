@@ -1,7 +1,7 @@
 "use client";
 
 import Title from "@/app/components/global/Title";
-import { useRef } from "react";
+import { useRef } from "react"; //AI
 import { useState } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
@@ -15,7 +15,7 @@ import { FaShuffle } from "react-icons/fa6";
 import { FaVolumeHigh } from "react-icons/fa6";
 
 export default function Track() {
-  useEffect(() => {
+  useEffect(() => { //AI
     const audio = audioRef.current;
     if (audio) {
       audio.load(); // force browser to load metadata
@@ -67,7 +67,7 @@ export default function Track() {
     const newTime = (clickX / bar.offsetWidth) * duration; //calculate new time based on click position
     audioRef.current.currentTime = newTime; //update audio current time
     setCurrentTime(newTime); //update state
-  };
+  }; //AI
 
   const handleVolumeChange = (e) => {
     const bar = e.currentTarget;
