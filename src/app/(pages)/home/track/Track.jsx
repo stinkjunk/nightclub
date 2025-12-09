@@ -120,7 +120,7 @@ export default function Track() {
   };
 
   const buttonStyling =
-    "mx-1 md:mx-5 p-3 hover:text-[var(--active)] cursor-pointer";
+    "mx-1 md:mx-5 p-3 hover:text-[var(--active)] cursor-pointer transition-colors duration-200";
 
   const currentTrack = Tracks[currentTrackIndex];
 
