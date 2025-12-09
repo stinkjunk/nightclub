@@ -1,10 +1,17 @@
 "use client"; //For motion
 import { useState } from "react";
+// import { useEffect } from "react";
+//BONUS: implemter måde at få hoverstate til at fungere på mobile,
+//evt via scroll position
 
 import Image from "next/image";
 import { motion } from "motion/react";
 
 export default function WelcomeCard(props) {
+
+
+
+
   const [isHovered, setIsHovered] = useState(false); //AI
   return (
     <div className={`grid relative h-full ${props.sentClass}`}>

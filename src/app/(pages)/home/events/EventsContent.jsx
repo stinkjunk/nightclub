@@ -12,6 +12,7 @@ export default function EventsContent({ events }) {
   const [isMobile, setIsMobile] = useState(false);
 
   const entries = events;
+  const hasError = entries?.[0]?.error;
 
   useEffect(() => {
     const checkMobile = () => {
@@ -54,7 +55,24 @@ export default function EventsContent({ events }) {
     >
       <Title title="Events of the Month" />
 
-      <div className="flex-grow overflow-hidden">
+      {hasError && (
+        <div className="flex items-center justify-center flex-col items-center justify-center h-130 mb-30">
+          <p
+          className="text-lg"
+          >
+            Unable to load events. Please try again later.
+          </p>
+          <p
+          className="text-sm mt-10 text opacity-70 italic"
+          >
+            {"(Psst... har du husket at starte din server?)"}
+
+          </p>
+        </div>
+      )}
+
+      {!hasError && (
+        <div className="flex-grow overflow-hidden">
         <motion.div
           className="grid h-full"
           style={{
@@ -86,12 +104,15 @@ export default function EventsContent({ events }) {
             />
           ))}
         </motion.div>
-      </div>
-      <div
-        className="h-30
-      flex items-center justify-center gap-4
-      "
-      >
+        </div>
+      )}
+
+      {!hasError && (
+        <div
+          className="h-30
+        flex items-center justify-center gap-4
+        "
+        >
         {Array.from({ length: slideCount }, (_, index) => {
           //Array.from works in a way where it must pass two arguments to the mapping function.
           //thus the first argument needs a placeholder for the unused value so index can be passed
@@ -108,7 +129,8 @@ export default function EventsContent({ events }) {
             ></button>
           );
         })}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
