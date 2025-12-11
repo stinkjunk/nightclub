@@ -1,5 +1,8 @@
 "use client";
 
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import { TimeSlider } from "@vidstack/react";
+
 import Title from "@/app/components/global/Title";
 import { useRef } from "react"; //AI
 import { useState } from "react";
@@ -42,9 +45,9 @@ export default function Track() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(0.8);
   const progress = duration ? (currentTime / duration) * 100 : 0;
-  const isEnded = progress >= 100;
+  const isEnded = false; //TODO: implementer ended state
   const volumePercent = volume * 100;
 
   const buttonStyling =
@@ -56,6 +59,15 @@ export default function Track() {
   return (
     <section className="w-full flex flex-col items-center">
       <Title title="Night Club Track" tag="h2" />
+
+      {/* <MediaPlayer
+        src={currentTrack.url}
+        paused={!isPlaying}
+        // autoPlay={isPlaying}
+        volume={volume}
+      >
+        <MediaProvider />
+      </MediaPlayer> */}
 
       <div className="w-full flex flex-col my-auto">
         <div className={`my-5 lg:h-80 lg:my-0 flex ${paddingStylingX}`}>
@@ -69,27 +81,22 @@ export default function Track() {
           </div>
           <div className="w-full h-full flex flex-col lg:ml-10 justify-center">
             <p className="text-xl">{`${currentTrack.artist} - ${currentTrack.title}`}</p>
-            <div
-              className="w-full relative h-1 bg-[var(--active)] cursor-pointer my-10"
-              //playbar
+            <MediaPlayer
+              src={currentTrack.url}
+              paused={!isPlaying}
+              // autoPlay={isPlaying}
+              volume={volume}
             >
-              {/* <div
-                className="h-1 absolute bg-black/[.9] right-0"
-                style={{
-                  width: `${
-                    100 - progress
-                  }%`,
-                }}
-              ></div> */}
-              {/* <div
-                className="absolute bg-white h-1 aspect-square rounded-full cursor-pointer
-                -translate-x-1/2 scale-400
-                "
-                style={{
-                  left: `${progress}%`,
-                }}
-              ></div> */}
-            </div>
+              {/*https://vidstack.io/docs/player/components/sliders/time-slider/?styling=tailwind-css*/}
+              <TimeSlider.Root className="group relative mx-[7.5px] inline-flex h-10 w-full cursor-pointer touch-none select-none items-center outline-none aria-hidden:hidden">
+                <TimeSlider.Track className="relative ring-sky-400 z-0 h-[5px] w-full  bg-white/30 group-data-[focus]:ring-[3px]">
+                  <TimeSlider.TrackFill className="bg-[var(--active)] absolute h-full w-[var(--slider-fill)]  will-change-[width]" />
+                  <TimeSlider.Progress className="absolute -z-1 h-full w-[var(--slider-progress)]  bg-white/50 will-change-[width]" />
+                </TimeSlider.Track>
+                <TimeSlider.Thumb className="absolute left-[var(--slider-fill)] top-1/2 z-20 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#cacaca] bg-white opacity-100 transition-opacity" />
+              </TimeSlider.Root>
+              <MediaProvider />
+            </MediaPlayer>
             <div className="w-full flex flex-col xl:flex-row justify-between items-center">
               <p className="mb-10">00:00 / XX:XX</p>
 
@@ -100,15 +107,22 @@ export default function Track() {
 
                 <button
                   className={`${buttonStyling} border-3 border[var(--text)] rounded-full inline-block aspect-square relative`}
+                  onClick={() => (
+                    setIsPlaying(!isPlaying), console.log("clicked")
+                  )}
                 >
-                  <FaPlay size={30} />
+                  {isEnded ? (
+                    <FaArrowRotateLeft size={30} />
+                  ) : isPlaying ? (
+                    <FaPause size={30} />
+                  ) : (
+                    <FaPlay size={30} />
+                  )}
                 </button>
                 <button className={buttonStyling}>
                   <FaForwardFast size={30} />
                 </button>
-                <button
-                  className={buttonStyling}
-                >
+                <button className={buttonStyling}>
                   <FaShuffle size={30} />
                 </button>
               </div>
@@ -138,9 +152,7 @@ export default function Track() {
           className={`lg:flex my-5 h-100 lg:h-60 lg:my-0 lg:px-30 xl:px-40 ${paddingStylingB}`}
         >
           <div className="flex flex-col justify-center">
-            <button
-              className="cursor-pointer mr-6 p-3 border-2 border-[var(--text)] hidden lg:block"
-            >
+            <button className="cursor-pointer mr-6 p-3 border-2 border-[var(--text)] hidden lg:block">
               <FaPlay size={20} className="scale-x-[-1]" />
             </button>
           </div>
@@ -177,23 +189,17 @@ export default function Track() {
             </button>
           ))}
           <div className="flex flex-col justify-center">
-            <button
-              className="cursor-pointer ml-6 p-3 border-2 border-[var(--text)] hidden lg:block"
-            >
+            <button className="cursor-pointer ml-6 p-3 border-2 border-[var(--text)] hidden lg:block">
               <FaPlay size={20} />
             </button>
           </div>
           {/*mobile buttons - this is such an ASS way to do it :/ */}
           <div className="w-full flex justify-center lg:hidden py-10">
-            <button
-              className="cursor-pointer mr-1.5 p-3 border-2 border-[var(--text)]"
-            >
+            <button className="cursor-pointer mr-1.5 p-3 border-2 border-[var(--text)]">
               <FaPlay size={20} className="scale-x-[-1]" />
             </button>
             <div className="flex flex-col justify-center">
-              <button
-                className="cursor-pointer ml-1.5 p-3 border-2 border-[var(--text)] lg:hidden"
-              >
+              <button className="cursor-pointer ml-1.5 p-3 border-2 border-[var(--text)] lg:hidden">
                 <FaPlay size={20} />
               </button>
             </div>
