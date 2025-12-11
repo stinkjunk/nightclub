@@ -1,5 +1,3 @@
-"use client"; //Screw it, header is client component. Hopefully no issues under the header scope.
-
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";

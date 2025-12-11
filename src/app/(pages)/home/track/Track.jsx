@@ -42,10 +42,17 @@ export default function Track() {
   ];
 
   const [currentTrackIndex, setcurrentTrackIndex] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(false);
   const currentTrack = Tracks[currentTrackIndex];
 
   return (
-    <MediaPlayer src={currentTrack.url} volume="0.8" autoPlay={true}>
+    <MediaPlayer
+      src={currentTrack.url}
+      volume="0.8"
+      autoPlay={autoPlay}
+      onPlay={() => setAutoPlay(true)}
+      onPause={() => setAutoPlay(false)}
+    >
       <MediaProvider />
       <PlayerContent
         Tracks={Tracks}
