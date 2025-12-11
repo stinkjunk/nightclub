@@ -230,3 +230,37 @@ body {
     /* tailwind:2xl */
   }
 }
+
+/*play button conditional, ville ikke virker med tailwind*/
+[data-paused] > .play-icon {
+  display: block;
+}
+
+[data-paused] > .pause-icon {
+  display: none;
+}
+
+:not([data-paused]) > .play-icon {
+  display: none;
+}
+
+:not([data-paused]) > .pause-icon {
+  display: block;
+}
+
+/*mute button conditional, ville ikke virker med tailwind*/
+[data-muted] > .volume-icon {
+  display: none;
+}
+
+[data-muted] > .muted-icon {
+  display: block;
+}
+
+:not([data-muted]) > .volume-icon {
+  display: block;
+}
+
+:not([data-muted]) > .muted-icon {
+  display: none;
+}
