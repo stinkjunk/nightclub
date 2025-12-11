@@ -11,8 +11,17 @@ export default function Burger(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // ikke bruge useEffect - forstår ikke kravet, da jeg ikke bruger useEffect til fetching/ting der kunne klares
+    // på server; useEffect ser ud til at være måden at interagere med DOM.
+
+    // HAR DOG været nødt til at bruge useEffect for at lytte til DOM for resize
+
+    // "Effects are an escape hatch from the React paradigm. They let you “step outside” of React and synchronize your
+    // components with some external system like a non-React widget, network, or the browser DOM."
+    // officiel react dokumentation: https://react.dev/learn/you-might-not-need-an-effect
+    // https://dev.to/hkp22/reacts-useeffect-best-practices-pitfalls-and-modern-javascript-insights-g2f
+
     //Scroll lock
-    //det er min forståelse at useEffect kan bruges til stort set at køre vanilla JS efter render
     window.addEventListener("resize", scrollLock);
     function scrollLock() {
       const isMobile = window.matchMedia("(max-width: 768px)").matches; //768 px er tailwinds md breakpoint

@@ -1,42 +1,53 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState /* useEffect */ } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function EventSlide(props) {
   const [isHovered, setIsHovered] = useState(false);
+  // const [activeCard, setActiveCard] = useState(null);
   const { isMobile } = props;
+  // const { index } = props;
   //isMobile state passet fra EventsContent.jsx som prop - behøver ikke
   //at gendefinere det her
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     // Toggle on click for mobile only
-    //e = event object, indeholder information om hvorfra handleClick blev kaldt
-    //(vores tilfælde: onClick på motion.div)
+    // console.log("Clicked on card ", index);
+    // setActiveCard(index);
+
     if (isMobile) {
-    //   e.stopPropagation();
       setIsHovered(!isHovered);
     }
   };
 
-  useEffect(
-    () => {
-      // Close when clicking outside (mobile only) AI
-      if (!isMobile) return;
+  // ikke bruge useEffect - forstår ikke kravet, da jeg ikke bruger useEffect til fetching/ting der kunne klares
+  // på server; useEffect ser ud til at være måden at interagere med DOM, men gør som bliver sagt.
 
-      const handleClickOutside = () => setIsHovered(false);
+  // "Effects are an escape hatch from the React paradigm. They let you “step outside” of React and synchronize your
+  // components with some external system like a non-React widget, network, or the browser DOM."
+  // officiel react dokumentation: https://react.dev/learn/you-might-not-need-an-effect
+  // https://dev.to/hkp22/reacts-useeffect-best-practices-pitfalls-and-modern-javascript-insights-g2f
 
-      if (isHovered) {
-        document.addEventListener("click", handleClickOutside);
-        return () => document.removeEventListener("click", handleClickOutside);
-        //cleanup, fjerner event listener
-        //react opbevarer cleanup funktionen og kalder den når isHovered ændres
-      }
-    },
-    [isHovered, isMobile]
-    //
-  );
+  // useEffect(
+  //   () => {
+  //     // Close when clicking outside (mobile only) AI
+  //     if (!isMobile) return;
+
+  //     const handleClickOutside = () => setIsHovered(false);
+
+  //     if (isHovered) {
+  //       document.addEventListener("click", handleClickOutside);
+  //       return () => document.removeEventListener("click", handleClickOutside);
+  //       //cleanup, fjerner event listener
+  //       //react opbevarer cleanup funktionen og kalder den når isHovered ændres
+  //       //return () kører når !isHovered
+  //     }
+  //   },
+  //   [isHovered, isMobile]
+  //   //
+  // );
 
   //filter date:
   const date = new Date(props.date);
@@ -75,7 +86,7 @@ export default function EventSlide(props) {
           >
             <Link
               href="#" //nothing for now
-              className="cursor-pointer px-5 py-2 bg-[var(--active)]" 
+              className="cursor-pointer px-5 py-2 bg-[var(--active)]"
             >
               Book Now
             </Link>
