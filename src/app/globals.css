@@ -231,7 +231,7 @@ body {
   }
 }
 
-/*play button conditional, ville ikke virker med tailwind*/
+/*play button conditional, ville ikke virke med tailwind*/
 [data-paused] > .play-icon {
   display: block;
 }
@@ -248,7 +248,7 @@ body {
   display: block;
 }
 
-/*mute button conditional, ville ikke virker med tailwind*/
+/*mute button conditional, ville ikke virke med tailwind*/
 [data-muted] > .volume-icon {
   display: none;
 }
