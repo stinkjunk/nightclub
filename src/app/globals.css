@@ -188,14 +188,16 @@ html:has(body.menu-open) {
 
 .eventSlide {
   /* mobile: full width, no margins */
-  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
   flex-shrink: 0;
   padding-left: 10%;
   padding-right: 10%;
 
   @media (min-width: 768px) {
     /* tailwind:md */
-    width: 50vw;
+    width: 50%;
     
     &:nth-child(odd) {
       padding-left: 10%;
