@@ -323,11 +323,3 @@ html:has(body.menu-open) {
   display: none;
 }
 
-.table-mask {
-  mask-repeat: no-repeat;
-  mask-size: 100% 100%;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-position: center;
-}

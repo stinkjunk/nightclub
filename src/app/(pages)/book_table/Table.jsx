@@ -11,16 +11,10 @@ export default function Table(props) {
   // aspect ratio 23:15
 
   const tableImg = `/assets/table/table_${table.size}.png`;
-  const maskClass =
-    table.size === 1
-      ? "[mask-image:url('/assets/table/table_1.png')]"
-      : table.size === 2
-      ? "[mask-image:url('/assets/table/table_2.png')]"
-      : "[mask-image:url('/assets/table/table_3.png')]";
 
   return (
     <div
-      className={`${maskClass} relative table-mask grid
+      className={`relative grid
     w-full aspect-[23/15] rotate-90 my-25 scale-150
     md:rotate-0 md:my-3 md:scale-100 overflow-hidden
     `}
