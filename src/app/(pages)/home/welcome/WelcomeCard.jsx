@@ -10,7 +10,7 @@ export default function WelcomeCard(props) {
 
 
 
-  const [isHovered, setIsHovered] = useState(false); //AI
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className={`grid relative h-full ${props.sentClass}`}>
       <Image

@@ -34,6 +34,10 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
 }
 
+html:has(body.menu-open) {
+  overflow: hidden;
+}
+
 .colActive {
   color: var(--active);
 }
@@ -184,20 +188,24 @@ body {
 
 .eventSlide {
   /* mobile: full width, no margins */
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 100vw;
+  flex-shrink: 0;
+  padding-left: 10%;
+  padding-right: 10%;
 
   @media (min-width: 768px) {
     /* tailwind:md */
+    width: 50vw;
+    
     &:nth-child(odd) {
-      margin-left: 10%;
-      margin-right: 2%;
+      padding-left: 10%;
+      padding-right: 2%;
       
       /* background-color: blue; */
     }
     &:nth-child(even) {
-      margin-right: 10%;
-      margin-left: 2%;
+      padding-right: 10%;
+      padding-left: 2%;
       /* background-color: red; */
     }
   }
@@ -205,30 +213,35 @@ body {
   @media (min-width: 1024px) {
     /* tailwind:lg */
     &:nth-child(odd) {
-      margin-left: 20%;
-      /* margin-right: 2%; */
+      padding-left: 10%;
+      /* padding-right: 2%; */
     }
     &:nth-child(even) {
-      margin-right: 20%;
-      /* margin-left: 2%; */
+      padding-right: 10%;
+      /* padding-left: 2%; */
     }
   }
 
   @media (min-width: 1280px) {
     /* tailwind:xl */
     &:nth-child(odd) {
-      margin-left: 30%;
-      /* margin-right: 2%; */
+      padding-left: 15%;
+      /* padding-right: 2%; */
     }
     &:nth-child(even) {
-      margin-right: 30%;
-      /* margin-left: 2%; */
+      padding-right: 15%;
+      /* padding-left: 2%; */
     }
   }
 
   @media (min-width: 1536px) {
     /* tailwind:2xl */
   }
+}
+
+.eventSlider {
+  display: flex;
+  flex-direction: row;
 }
 
 /*play button conditional, ville ikke virke med tailwind*/

@@ -15,7 +15,6 @@ export default async function Home() {
         <Hero />
         <Welcome />
         <Events events={data["/events"]} />
-        {/* Gallery */}
         <Track />
       </Suspense>
       {/* <Loading /> */}
