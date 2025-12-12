@@ -43,7 +43,9 @@ export default function Table(props) {
       md:rotate-0
       "
       >
-        <button>{table.id}</button>
+        <button
+        className={`p-4 ${reserved ? 'cursor-not-allowed text-black' : 'cursor-pointer'}`}
+        >{table.id}</button>
       </div>
     </div>
   );
