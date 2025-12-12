@@ -12,7 +12,9 @@ export default function WelcomeCard(props) {
 
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className={`grid relative h-full ${props.sentClass}`}>
+    <div className={`grid relative h-full ${props.sentClass}`}
+    title="Jeg ved godt animationen er buggy - Er pga. mit lydafspiller komponent, hvilket sjovt nok ikke ødelægger andre komponenter end disse kort. Sikkert noget at gøre med mit biblotek, Vidstack, og hvordan jeg importerer det."
+    >
       <Image
         src={props.src}
         alt="Image"
