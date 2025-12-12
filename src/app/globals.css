@@ -65,8 +65,7 @@ html:has(body.menu-open) {
   } */
 }
 
-.hoverPinkLine,
-.hoverPinkTransparent {
+.hoverPinkLine {
   border-style: solid;
   border-width: 3px 0;
   border-color: transparent;
@@ -98,6 +97,50 @@ html:has(body.menu-open) {
 
   &:hover {
     border-color: var(--active);
+    &::after,
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      transform: translateX(-80%) translateY(-80%) rotate(45deg) scale(1);
+    }
+    &::before {
+      transform: translateX(80%) translateY(80%) rotate(45deg) scale(1);
+    }
+  }
+}
+
+.hoverPinkTransparent {
+  border-style: solid;
+  border-width: 3px 0;
+  border-color: var(--active);
+  content: "";
+  position: relative;
+  overflow: hidden;
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background: var(--active);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+  &::after {
+    top: 0;
+    left: 0;
+    transform: translateX(-100%) translateY(-100%) rotate(45deg) scale(0);
+  }
+  &::before {
+    bottom: 0;
+    right: 0;
+    transform: translateX(100%) translateY(100%) rotate(45deg) scale(0);
+  }
+
+  &.isHovered {
     &::after,
     &::before {
       opacity: 1;

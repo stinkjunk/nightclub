@@ -80,7 +80,11 @@ export default function EventSlide(props) {
             setIsShowing((prev) => !prev); // mobile: toggle on tap
           }}
         >
-          <div className="col-start-1 row-start-1 hoverPinkTransparent z-10 pointer-events-none"></div>
+          <motion.div 
+            className={`col-start-1 row-start-1 hoverPinkTransparent z-10 pointer-events-none ${isHovered ? 'isHovered' : ''}`}
+            animate={{ opacity: isShowing ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+          ></motion.div>
           <Image
             src={props.img}
             alt="Event Image"
