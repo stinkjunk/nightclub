@@ -5,10 +5,11 @@ export default function Tables(props) {
   return (
     <div
       className="
-      grid grid-cols-5 gap-4
+      grid grid-cols-3
       
       px-10 pb-10 
-      md:px-30 md:pb-15 
+      md:px-30 md:pb-15
+      lg:grid-cols-5 
       xl:px-40 xl:pb-20 
       "
     >
