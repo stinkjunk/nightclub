@@ -15,7 +15,8 @@ export default async function Home() {
         <Hero />
         <Welcome />
         <Events events={data["/events"]} />
-        <Track />
+        <Track />{" "}
+        {/* skaber problemer med animationer på welcome komponent - oh well, sikkert noget med vidstack */}
       </Suspense>
       {/* <Loading /> */}
     </main>
