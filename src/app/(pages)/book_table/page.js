@@ -1,6 +1,7 @@
 import PageHeadline from "@/app/components/global/PageHeadline";
 import AppHeader from "@/app/components/layout/header/AppHeader";
 import Tables from "./Tables";
+import BookTableForm from "./BookTableForm";
 
 const tables = [
   {
@@ -71,9 +72,19 @@ export default function BookTable() {
       <AppHeader />
       <main className="pattern-sm">
         <PageHeadline title="Book Table" />
+        <div
+        className="
+        px-10 py-10 
+        md:px-30 md:py-15
+        xl:px-40 xl:py-20
+        "
+        >
         <Tables
         tables={tables}
         />
+        <h3 className="uppercase text-3xl font-bold mb-3">Book a table</h3>
+        <BookTableForm />
+        </div>
       </main>
     </>
   );

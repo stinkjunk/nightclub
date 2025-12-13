@@ -7,11 +7,10 @@ export default function Tables(props) {
     <div
       className="
       grid grid-cols-3
-      
-      px-10 py-10 
-      md:px-30 md:py-15
+      pb-10 
+      md:pb-15
       lg:grid-cols-5 
-      xl:px-40 xl:py-20 
+      xl:pb-20 
       "
     >
       {/* <p>Work in Progress</p> */}
