@@ -10,14 +10,14 @@ import { AnimatePresence } from "motion/react";
 export default function Burger(props) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      document.body.classList.add("menu-open");
-    } else {
-      document.body.classList.remove("menu-open");
-    }
-  };
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  //   if (!isOpen) {
+  //     document.body.classList.add("menu-open");
+  //   } else {
+  //     document.body.classList.remove("menu-open");
+  //   }
+  // };
 
   // useEffect(() => {
   //   // ikke bruge useEffect - forstår ikke kravet, da jeg ikke bruger useEffect til fetching/ting der kunne klares
@@ -53,8 +53,8 @@ export default function Burger(props) {
   return (
     <>
       <button
-        onClick={toggleMenu}
-        className={props.sentClass + " cursor-pointer w-10 h-10 my-auto"}
+        onClick={() => setIsOpen(!isOpen)}
+        className={props.sentClass + " cursor-pointer w-10 h-10 my-auto " + (isOpen ? 'menuOpen' : '')}
       >
         <FaBars className="h-full w-full" />
       </button>
@@ -94,7 +94,7 @@ export default function Burger(props) {
             </nav>
             <div className="col-start-3 flex flex-col items-center">
               <button
-                onClick={toggleMenu}
+                onClick={()=> setIsOpen(!isOpen)}
                 className="w-8 h-8 mt-3 cursor-pointer"
               >
                 <FaXmark className="w-full h-full" />
