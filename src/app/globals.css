@@ -158,12 +158,9 @@ body {
   }
 }
 
-
-
 .hoverPinkLine:hover {
   background: rgb(12, 12, 12);
 }
-
 
 .pinkLine {
   /* outline: 3px solid var(--active); */
@@ -244,11 +241,11 @@ body {
   @media (min-width: 768px) {
     /* tailwind:md */
     width: 50%;
-    
+
     &:nth-child(odd) {
       padding-left: 10%;
       padding-right: 2%;
-      
+
       /* background-color: blue; */
     }
     &:nth-child(even) {
@@ -333,4 +330,15 @@ body {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   -webkit-mask-position: center;
+  transition: scale 0.2s ease-in-out;
+  &.active,
+  &:has(.hoverChild:hover) {
+    scale: 102%;
+  }
+  @media (max-width: 767px) {
+    &.active,
+    &:has(.hoverChild:hover) {
+      scale: 155%;
+    }
+  }
 }
