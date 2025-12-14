@@ -42,13 +42,13 @@ const SubmitButton = () => {
 const BookTableForm = (props) => {
   //length of tables from props:
   const tableLength = props.tables.length;
-  console.log("Table length in BookTableForm:", tableLength);
+  // console.log("Table length in BookTableForm:", tableLength);
 
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentSelected = searchParams.get("selected");
   const tableData = currentSelected
-    ? props.tables.find((table) => table.id)
+    ? props.tables.find((table) => table.id === parseInt(currentSelected))
     : null;
 
   const currentDate = searchParams.get("date");
@@ -56,9 +56,9 @@ const BookTableForm = (props) => {
   //   ? props.fetchedDate.find((date) => date === currentDate)
   //   : null;
 
-  // console.log("Date data in BookTableForm:", dateData);
+  // // console.log("Date data in BookTableForm:", dateData);
 
-  console.log("fetcheDates in BookTableForm:", props.fetchedDates);
+  // console.log("fetcheDates in BookTableForm:", props.fetchedDates);
   const [state, postProduct] = useActionState(submitProduct, {
     success: null,
     errors: {},
@@ -70,8 +70,8 @@ const BookTableForm = (props) => {
       reservation.date === currentDate &&
       String(reservation.table) === String(currentSelected)
   );
-  console.log("Current date: ", currentDate);
-  console.log("Is the selected table reserved?", reserved);
+  // console.log("Current date: ", currentDate);
+  // console.log("Is the selected table reserved?", reserved);
 
   const handleTableNumberChange = (e) => {
     let value = parseInt(e.target.value) || 0;
@@ -95,7 +95,7 @@ const BookTableForm = (props) => {
       { scroll: false }
     );
   };
-
+  // console.log("tableData in BookTableForm:", tableData);
   let maxGuests;
   if (tableData) {
     if (tableData.size === 1) maxGuests = 4;

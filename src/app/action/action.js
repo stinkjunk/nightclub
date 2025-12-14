@@ -22,7 +22,7 @@ export const submitProduct = async (prevState, formData) => {
       date,
     },
   };
-  // console.log("date in action.js:", date);
+  // // console.log("date in action.js:", date);
 
   // Validation
   if (!clientName) {
@@ -66,17 +66,38 @@ export const submitProduct = async (prevState, formData) => {
   if (Object.keys(state.errors).length > 0) {
     return state;
   }
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const response = await fetch("https://dummyjson.com/products/add", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      //objekt sendt til API
-      title: "test",
-    }),
-  });
-  console.log(response);
 
-  state.success = true;
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // const response = await fetch("https://dunmyjson.com/products/add",
+    // const response = await fetch("https://dummyjson.com/products/add",
+    const response = await fetch("http://localhost:4000/reservations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        //objekt sendt til API
+        // name: "Robert Downey Jr",
+        // email: "downey@mail.dk",
+        // table: "4",
+        // guests: "3",
+        // date: "2025-03-15T20:00:00.000Z",
+        // phone: "2342 78986",
+        name: clientName,
+        email: clientEmail,
+        table: tableNumber,
+        guests: guestNumber,
+        date: date + "T20:00:00.000Z",
+        phone: contactNumber,
+        comment: comment,
+      }),
+    });
+    // console.log(response);
+
+    state.success = true;
+  } catch (error) {
+    console.error("Booking submission failed:", error);
+    state.success = false;
+  }
+
   return state;
 };

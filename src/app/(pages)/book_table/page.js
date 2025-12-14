@@ -96,7 +96,7 @@ async function GetBookTable() {
       table: reservation.table,
     }));
 
-    console.log("Formatted reservation dates:", dates);
+    // console.log("Formatted reservation dates:", dates);
 
     return (
       <div

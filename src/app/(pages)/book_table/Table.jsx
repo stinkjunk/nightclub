@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 export default function Table(props) {
   const table = props.table;
   const fetchedDates = props.fetchedDates;
-  // console.log("fetchedDates in Table component:", fetchedDates);
+  // // console.log("fetchedDates in Table component:", fetchedDates);
   const searchParams = useSearchParams();
   const currentSelected = searchParams.get("selected");
   const currentDate = searchParams.get("date");
