@@ -22,6 +22,7 @@ export const submitProduct = async (prevState, formData) => {
       date,
     },
   };
+  // console.log("date in action.js:", date);
 
   // Validation
   if (!clientName) {
@@ -36,7 +37,10 @@ export const submitProduct = async (prevState, formData) => {
     state.errors.clientEmail = "Please enter a valid email.";
   }
 
-  if (!tableNumber) {
+  if (date === "reserved") {
+    state.errors.tableNumber =
+      "Selected table is already reserved for this date.";
+  } else if (!tableNumber) {
     state.errors.tableNumber = "Please select a table.";
   } /* else if (isNaN(tableNumber)) {
     state.errors.tableNumber = "Table number must be valid.";

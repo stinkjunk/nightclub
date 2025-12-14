@@ -65,6 +65,14 @@ const BookTableForm = (props) => {
     fields: {},
   });
 
+  const reserved = props.fetchedDates.some(
+    (reservation) =>
+      reservation.date === currentDate &&
+      String(reservation.table) === String(currentSelected)
+  );
+  console.log("Current date: ", currentDate);
+  console.log("Is the selected table reserved?", reserved);
+
   const handleTableNumberChange = (e) => {
     let value = parseInt(e.target.value) || 0;
 
@@ -127,8 +135,10 @@ const BookTableForm = (props) => {
           type="text"
           name="date"
           className="hidden"
-          placeholder={currentDate}
-          defaultValue={currentDate}
+          placeholder={currentDate ? (reserved ? "reserved" : currentDate) : ""}
+          defaultValue={currentDate ? (reserved ? "reserved" : currentDate) : ""}
+          // nok ikke en god idé i virkeligheden - du ville vitterligt kunne reservere et allerede
+          // reserveret bord i dev tools ved at ændre værdien her. er klar over dette.
         ></input>
         <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           <input
