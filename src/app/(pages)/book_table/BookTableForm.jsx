@@ -30,7 +30,7 @@ const SubmitButton = () => {
     <button
       type="submit"
       className={`col-2 mt-5 uppercase ml-auto w-fit px-8 border-y-1 py-2 ${
-        pending ? "opacity-50 cursor-not-allowed" : ""
+        pending ? "opacity-50 cursor-not-allowed" : "cursor-pointer "
       }`}
       disabled={pending}
     >
