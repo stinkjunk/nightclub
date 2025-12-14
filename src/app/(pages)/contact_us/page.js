@@ -6,7 +6,7 @@ export default function ContactUs() {
     <>
       <AppHeader />
       <main>
-        <PageHeadline title="Book Table" />
+        <PageHeadline title="Contact Us" />
       </main>
     </>
   );

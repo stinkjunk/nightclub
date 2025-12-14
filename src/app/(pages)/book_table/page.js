@@ -68,7 +68,7 @@ const tables = [
 ];
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toISOString().split('T')[0];
+  return new Date(dateString).toISOString().split("T")[0];
 };
 
 const march = [
@@ -80,43 +80,62 @@ const march = [
   "2025-03-14",
   "2025-03-15",
   "2025-03-16",
-]
+];
 
-export default async function BookTable() {
+async function GetBookTable() {
   const data = await fetchAPI(["/reservations"]);
   console.log("Fetched reservations data:", data);
-  
-  const dates = data["/reservations"].map(reservation => ({
-    id: reservation.id,
-    date: formatDate(reservation.date),
-    table: reservation.table
-  }));
+  const hasError = Boolean(data?.["/reservations"]?.[0]?.error);
 
-  console.log("Formatted reservation dates:", dates);
-  
-  return (
-    <>
-      <AppHeader />
-      <main className="pattern-sm">
-        <PageHeadline title="Book Table" />
-        <div
+  if (!hasError) {
+    const dates = data["/reservations"].map((reservation) => ({
+      id: reservation.id,
+      date: formatDate(reservation.date),
+      table: reservation.table,
+    }));
+
+    console.log("Formatted reservation dates:", dates);
+
+    return (
+      <div
         className="
         px-10 py-10 
         md:px-30 md:py-15
         xl:px-40 xl:py-20
         "
-        >
-        <Tables
-        tables={tables}
-        fetchedDates={dates}
-        />
+      >
+        <Tables tables={tables} fetchedDates={dates} />
         <h3 className="uppercase text-3xl font-bold mb-3">Book a table</h3>
-        <BookTableForm
-        tables={tables}
-        dateRange={march}
-        fetchedDates={dates}
-        />
-        </div>
+        <BookTableForm tables={tables} dateRange={march} fetchedDates={dates} />
+      </div>
+    );
+  } else
+    return (
+      <div
+        className=" h-180 flex flex-col items-center justify-center
+         px-10 py-10 
+         md:px-30 md:py-15
+         xl:px-40 xl:py-20
+         "
+      >
+        <p className="text-lg">
+          Unable to load events. Please try again later.
+        </p>
+        <p className="mt-10 text-red-500">{data?.["/reservations"]?.[0]?.error}</p>
+        <p className="text-sm mt-10 opacity-70 italic">
+          {"(Psst... har du husket at starte din server?)"}
+        </p>
+      </div>
+    );
+}
+
+export default function BookTable() {
+  return (
+    <>
+      <AppHeader />
+      <main className="pattern-sm">
+        <PageHeadline title="Book Table" />
+        <GetBookTable />
       </main>
     </>
   );
