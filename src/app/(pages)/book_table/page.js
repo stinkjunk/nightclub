@@ -2,6 +2,7 @@ import PageHeadline from "@/app/components/global/PageHeadline";
 import AppHeader from "@/app/components/layout/header/AppHeader";
 import Tables from "./Tables";
 import BookTableForm from "./BookTableForm";
+import { fetchAPI } from "@/app/utils/fetchAPI";
 
 const tables = [
   {
@@ -66,7 +67,33 @@ const tables = [
   },
 ];
 
-export default function BookTable() {
+const formatDate = (dateString) => {
+  return new Date(dateString).toISOString().split('T')[0];
+};
+
+const march = [
+  // dates, march 10th to march 16th, '25
+  "2025-03-10",
+  "2025-03-11",
+  "2025-03-12",
+  "2025-03-13",
+  "2025-03-14",
+  "2025-03-15",
+  "2025-03-16",
+]
+
+export default async function BookTable() {
+  const data = await fetchAPI(["/reservations"]);
+  console.log("Fetched reservations data:", data);
+  
+  const dates = data["/reservations"].map(reservation => ({
+    id: reservation.id,
+    date: formatDate(reservation.date),
+    table: reservation.table
+  }));
+
+  console.log("Formatted reservation dates:", dates);
+  
   return (
     <>
       <AppHeader />
@@ -81,9 +108,14 @@ export default function BookTable() {
         >
         <Tables
         tables={tables}
+        fetchedDates={dates}
         />
         <h3 className="uppercase text-3xl font-bold mb-3">Book a table</h3>
-        <BookTableForm />
+        <BookTableForm
+        tables={tables}
+        dateRange={march}
+        fetchedDates={dates}
+        />
         </div>
       </main>
     </>

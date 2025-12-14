@@ -3,6 +3,7 @@ import Table from "./Table";
 
 export default function Tables(props) {
   const tables = props.tables;
+  const fetchedDates = props.fetchedDates;
   return (
     <div
       className="
@@ -15,7 +16,7 @@ export default function Tables(props) {
     >
       {/* <p>Work in Progress</p> */}
       {tables.map((table, i) => (
-        <Table key={i} table={table} />
+        <Table key={i} table={table} fetchedDates={fetchedDates}/>
       ))}
     </div>
   );

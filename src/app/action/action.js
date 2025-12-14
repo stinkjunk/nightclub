@@ -1,29 +1,58 @@
 "use server";
+
 export const submitProduct = async (prevState, formData) => {
-  const productName = formData.get("productname");
-  const productPrice = Number(formData.get("productprice"));
+  const clientName = formData.get("clientname");
+  const clientEmail = formData.get("clientemail");
+  const tableNumber = formData.get("tablenumber");
+  const guestNumber = formData.get("guestnumber");
+  const contactNumber = formData.get("contacttnumber");
+  const comment = formData.get("comment");
 
   const state = {
     success: null,
     errors: {},
     fields: {
-      productName,
-      productPrice,
+      clientName,
+      clientEmail,
+      tableNumber,
+      guestNumber,
+      contactNumber,
+      comment,
     },
   };
 
-  if (!productName) {
-    state.errors.productName = "Please fill in the product name.";
-  } else if (productName.length < 5) {
-    state.errors.productName = "Your product name must be at least 5 characters long.";
+  // Validation
+  if (!clientName) {
+    state.errors.clientName = "Please enter your name.";
+  } else if (clientName.length < 2) {
+    state.errors.clientName = "Name must be at least 2 characters.";
   }
 
-  if (!productPrice) {
-    state.errors.productPrice = "Please provide a price for your product.";
-  } else if (productPrice < 0.5) {
-    state.errors.productPrice = "The price must be at least 50 cents.";
+  if (!clientEmail) {
+    state.errors.clientEmail = "Please enter your email.";
+  } else if (!clientEmail.includes("@") || !clientEmail.includes(".")) {
+    state.errors.clientEmail = "Please enter a valid email.";
   }
 
+  if (!tableNumber) {
+    state.errors.tableNumber = "Please select a table.";
+  } /* else if (isNaN(tableNumber)) {
+    state.errors.tableNumber = "Table number must be valid.";
+  } */ // burder ikke være muligt at sende ikke-numerisk input pga input type=number
+
+  if (!guestNumber) {
+    state.errors.guestNumber = "Please enter number of guests.";
+  } else if (guestNumber < 1) {
+    state.errors.guestNumber = "Must have at least 1 guest.";
+  }
+
+  if (!contactNumber) {
+    state.errors.contactNumber = "Please enter your contact number.";
+  } else if (contactNumber.length < 8) {
+    state.errors.contactNumber = "Please enter a valid contact number.";
+  }
+
+  // Return early if there are errors
   if (Object.keys(state.errors).length > 0) {
     return state;
   }
@@ -32,11 +61,12 @@ export const submitProduct = async (prevState, formData) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      title: productName,
+      //objekt sendt til API
+      title: "test",
     }),
   });
   console.log(response);
 
-  state.success = response.ok;
+  state.success = true;
   return state;
 };

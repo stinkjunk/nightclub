@@ -5,8 +5,11 @@ import { useSearchParams } from "next/navigation";
 
 export default function Table(props) {
   const table = props.table;
+  const fetchedDates = props.fetchedDates;
+  // console.log("fetchedDates in Table component:", fetchedDates);
   const searchParams = useSearchParams();
   const currentSelected = searchParams.get("selected");
+  const currentDate = searchParams.get("date");
   //   let tableImg;
   //   if (table.size === 1) {
   //     tableImg = "/assets/table/table_1.png";
@@ -15,8 +18,16 @@ export default function Table(props) {
   //table pngs er alle 230 x 150
   // aspect ratio 23:15
 
+  // search fetchedDates for reservations (keyword: date) matching currentDate and this table.id (keyword: table):
+
+  const reserved = fetchedDates.some(
+    (reservation) =>
+      reservation.date === currentDate &&
+      String(reservation.table) === String(table.id)
+  );
+
   
-  const reserved = false; // hardcoded placeholder værdi
+  // const reserved = false; // hardcoded placeholder værdi
   const reservedFilter = reserved
     ? "bg-red-500 opacity-75"
     : "";
@@ -37,7 +48,18 @@ export default function Table(props) {
   const href = (() => {
     if (reserved) return "#";
     const isSelected = currentSelected === String(table.id);
-    return isSelected ? "/book_table" : `/book_table?selected=${table.id}`;
+    
+    if (isSelected) {
+      // Remove the selected parameter
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("selected");
+      return `/book_table${params.toString() ? `?${params.toString()}` : ''}`;
+    } else {
+      // Add/update the selected parameter
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("selected", table.id);
+      return `/book_table?${params.toString()}`;
+    }
   })();
 
   return (
