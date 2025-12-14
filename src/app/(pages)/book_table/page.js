@@ -3,6 +3,8 @@ import AppHeader from "@/app/components/layout/header/AppHeader";
 import Tables from "./Tables";
 import BookTableForm from "./BookTableForm";
 import { fetchAPI } from "@/app/utils/fetchAPI";
+import { Suspense } from "react";
+import Loading from "@/app/components/global/Loading";
 
 const tables = [
   {
@@ -121,7 +123,9 @@ async function GetBookTable() {
         <p className="text-lg">
           Unable to load events. Please try again later.
         </p>
-        <p className="mt-10 text-red-500">{data?.["/reservations"]?.[0]?.error}</p>
+        <p className="mt-10 text-red-500">
+          {data?.["/reservations"]?.[0]?.error}
+        </p>
         <p className="text-sm mt-10 opacity-70 italic">
           {"(Psst... har du husket at starte din server?)"}
         </p>
@@ -131,12 +135,12 @@ async function GetBookTable() {
 
 export default function BookTable() {
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <AppHeader />
       <main className="pattern-sm">
         <PageHeadline title="Book Table" />
         <GetBookTable />
       </main>
-    </>
+    </Suspense>
   );
 }
