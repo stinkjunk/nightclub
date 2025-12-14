@@ -48,7 +48,7 @@ const BookTableForm = (props) => {
   const searchParams = useSearchParams();
   const currentSelected = searchParams.get("selected");
   const tableData = currentSelected
-    ? props.tables.find((table) => table.id === parseInt(currentSelected))
+    ? props.tables.find((table) => table.id)
     : null;
 
   const currentDate = searchParams.get("date");
@@ -58,7 +58,7 @@ const BookTableForm = (props) => {
 
   // console.log("Date data in BookTableForm:", dateData);
 
-  console.log("fetchedDates in BookTableForm:", props.fetchedDates);
+  console.log("fetcheDates in BookTableForm:", props.fetchedDates);
   const [state, postProduct] = useActionState(submitProduct, {
     success: null,
     errors: {},
@@ -123,7 +123,14 @@ const BookTableForm = (props) => {
             *{state.errors.clientName}
           </p>
         )}
-        <div className={`${formWrapperStyle}`}>
+        <input
+          type="text"
+          name="date"
+          className="hidden"
+          placeholder={currentDate}
+          defaultValue={currentDate}
+        ></input>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           <input
             type="text"
             name="clientname"
@@ -134,7 +141,7 @@ const BookTableForm = (props) => {
                `}
           />
         </div>
-        <div className={`${formWrapperStyle}`}>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           {state.errors?.clientEmail && (
             <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
               *{state.errors.clientEmail}
@@ -151,7 +158,7 @@ const BookTableForm = (props) => {
               }`}
           />
         </div>
-        <div className={`${formWrapperStyle}`}>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           {state.errors?.tableNumber && (
             <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
               *{state.errors.tableNumber}
@@ -172,7 +179,7 @@ const BookTableForm = (props) => {
               }`}
           />
         </div>
-        <div className={`${formWrapperStyle}`}>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           {state.errors?.guestNumber && (
             <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
               *{state.errors.guestNumber}
@@ -194,7 +201,12 @@ const BookTableForm = (props) => {
               }`}
           />
         </div>
-        <div className={`${formWrapperStyle} `}>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
+          {state.errors?.date && (
+            <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
+              *{state.errors.date}
+            </p>
+          )}
           <DropDown
             // sentItems={[
             //   "date 1 (placeholder)",
@@ -209,10 +221,11 @@ const BookTableForm = (props) => {
               currentDate ? "Date: " + formatDate(currentDate) : "Select Date"
             }
             passedStyle={formStyle}
+            hasError={state.errors?.date}
           ></DropDown>
         </div>
 
-        <div className={`${formWrapperStyle} `}>
+        <div className={`${formWrapperStyle} col-span-2 md:col-span-1`}>
           {state.errors?.contactNumber && (
             <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
               *{state.errors.contactNumber}

@@ -19,9 +19,11 @@ export default function DropDown(props) {
 
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <div
-        className={`${props.passedStyle} flex overflow-hidden cursor-pointer items-center`}
+        className={`${props.passedStyle} flex overflow-hidden cursor-pointer items-center ${
+          props.hasError ? "placeholder-red-400 text-red-400" : ""
+        }`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {props.selected}

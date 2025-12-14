@@ -7,6 +7,7 @@ export const submitProduct = async (prevState, formData) => {
   const guestNumber = formData.get("guestnumber");
   const contactNumber = formData.get("contacttnumber");
   const comment = formData.get("comment");
+  const date = formData.get("date");
 
   const state = {
     success: null,
@@ -18,6 +19,7 @@ export const submitProduct = async (prevState, formData) => {
       guestNumber,
       contactNumber,
       comment,
+      date,
     },
   };
 
@@ -50,6 +52,10 @@ export const submitProduct = async (prevState, formData) => {
     state.errors.contactNumber = "Please enter your contact number.";
   } else if (contactNumber.length < 8) {
     state.errors.contactNumber = "Please enter a valid contact number.";
+  }
+
+  if (!date) {
+    state.errors.date = "Please select a date.";
   }
 
   // Return early if there are errors
