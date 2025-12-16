@@ -121,7 +121,7 @@ async function GetBookTable() {
          "
       >
         <p className="text-lg">
-          Unable to load events. Please try again later.
+          Unable to load tables. Please try again later.
         </p>
         <p className="mt-10 text-red-500">
           {data?.["/reservations"]?.[0]?.error}

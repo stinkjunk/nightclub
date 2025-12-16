@@ -229,6 +229,12 @@ body {
   height: calc(100vh - var(--headerHeight)) !important;
 }
 
+.mobileMinusHeaderHeight {
+  @media (max-width: 768px) {
+    height: calc(100vh - var(--headerHeight) - 50px) !important;
+  }
+}
+
 .eventSlide {
   /* mobile: full width, no margins */
   display: flex;
