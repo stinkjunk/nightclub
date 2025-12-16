@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import Loading from "@/app/components/global/Loading";
 import Link from "next/link";
 import PostContent from "./PostContent";
+import PostComment from "./PostComment";
 
 async function Blogpost({ id }) {
   console.log("Id in Blogpost component:", id);
@@ -56,11 +57,11 @@ async function Blogpost({ id }) {
     } else {
       return (
         <div
-          // className="
-          //  px-10 py-10
-          //  md:px-30 md:py-15
-          //  xl:px-40 xl:py-20
-          //  "
+        // className="
+        //  px-10 py-10
+        //  md:px-30 md:py-15
+        //  xl:px-40 xl:py-20
+        //  "
         >
           <PostContent
             title={post.title}
@@ -71,6 +72,7 @@ async function Blogpost({ id }) {
             comments={comments}
             commentsLength={commentsLength}
           />
+          <PostComment postId={post.id} />
         </div>
       );
     }

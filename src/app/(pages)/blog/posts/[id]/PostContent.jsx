@@ -6,6 +6,7 @@ export default function PostContent(props) {
     const date = new Date(dateString);
     // return date.toLocaleDateString(undefined, options);
     return date.toLocaleDateString("en-US", options); // brug dette andre steder også for at undgå lokal oversættelse
+    const blogpostId = props.postId;
   };
   return (
     <>
