@@ -68,7 +68,7 @@ export const reserveTable = async (prevState, formData) => {
   }
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
     // const response = await fetch("https://dunmyjson.com/products/add",
     // const response = await fetch("https://dummyjson.com/products/add",
     const response = await fetch("http://localhost:4000/reservations", {
