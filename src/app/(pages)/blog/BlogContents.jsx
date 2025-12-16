@@ -57,36 +57,43 @@ export default function BlogContents(props) {
                   />
                 </div>
                 <div
-                  className={`md:row-start-1 my-10 flex flex-col ${
+                  className={`md:row-start-1 my-10 flex flex-col overflow-hidden
+                    px-7
+                    md:px-0
+                    ${
                     isEven
-                      ? "md:col-start-1 md:mr-5 md:ml-20"
-                      : "md:col-start-2 md:mr-20 md:ml-5"
+                      ? "md:col-start-1 md:mr-7 md:ml-20"
+                      : "md:col-start-2 md:mr-20 md:ml-7"
                   }`}
                 >
-                  <div className="overflow-hidden flex-grow"
-                  style={{
-                  maskImage:
-                    "linear-gradient(to bottom, black 80%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, black 80%, transparent 100%)",
-                  //fadeout gradient for text overflow med mask image
-                }}
-                  
+                  <div
+                    className="overflow-hidden flex-grow"
+                    style={{
+                      maskImage:
+                        "linear-gradient(to bottom, black 80%, transparent 100%)",
+                      WebkitMaskImage:
+                        "linear-gradient(to bottom, black 80%, transparent 100%)",
+                      //fadeout gradient for text overflow med mask image
+                    }}
                   >
                     <h2 className="text-xl uppercase">{post.title}</h2>
-                    <p className="font-bold text-[var(--active)]">
+                    <p className="font-bold text-[var(--active)] mb-2 md:mb-5">
                       BY {post.author} / {postComments} comment
                       {postComments !== 1 ? "s" : ""}
                       {/*ingen dato inkluderet for blogposts i API, så kan ikke implementeres*/}
                     </p>
                     <p>{post.content}</p>
                   </div>
-                    <Link
-                        href={`#`}
-                        className={`py-2 px-5 w-fit ${isEven ? "ml-auto" : ""} mt-5 border-y-1`}
-                        >
-                        Read more
-                    </Link>
+                  <Link
+                    href={`#`}
+                    className={`py-2 px-5 w-fit 
+                        transition-colors duration-200 hover:text-[var(--active)]
+                        ${
+                      isEven ? "ml-auto" : ""
+                    } mt-5 border-y-1`}
+                  >
+                    Read more
+                  </Link>
                 </div>
               </article>
             );
@@ -95,7 +102,8 @@ export default function BlogContents(props) {
       {pages > 1 && (
         <div
           className="
-        pt-30 pb-10
+        pt-7 pb-10
+        md:pt-30 md:pb-10
         grid grid-cols-3 w-70 mx-auto"
         >
           <div className="flex justify-end">
