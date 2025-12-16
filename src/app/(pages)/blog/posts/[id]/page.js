@@ -4,6 +4,7 @@ import { fetchAPI } from "@/app/utils/fetchAPI";
 import { Suspense } from "react";
 import Loading from "@/app/components/global/Loading";
 import Link from "next/link";
+import PostContent from "./PostContent";
 
 async function Blogpost({ id }) {
   console.log("Id in Blogpost component:", id);
@@ -12,14 +13,22 @@ async function Blogpost({ id }) {
     `/comments?blogpostId=${id}`,
   ]);
   const post = data?.[`/blogposts/${id}`];
+
   const comments = data?.[`/comments?blogpostId=${id}`];
-  const areComments = Array.isArray(comments) && comments.length > 0;
+  //   const areComments = Array.isArray(comments) && comments.length > 0;
   const exists = Boolean(post && Object.keys(post).length);
   console.log("Fetched blogpost:", data);
-  console.log("Exists? ", exists);
-  console.log("Comments? ", areComments);
+  console.log("post: ", post);
+  console.log("imgUrl:", post.asset.url);
+
+  const commentsLength = comments.filter(
+    (comment) => comment.blogpostId == post.id
+  ).length;
+
+  //   console.log("Exists? ", exists);
+  //   console.log("Comments? ", areComments);
   //   const data = await fetchAPI(["/blogposts"]);
-  //   //   console.log("Fetched blogpost: ", post);
+  //   console.log("Fetched blogpost: ", post);
   //   console.log("Fetched blogposts:", data);
   const hasError = Boolean(post?.[0]?.error);
   console.log("Has error?", hasError);
@@ -36,13 +45,32 @@ async function Blogpost({ id }) {
         >
           <p className="text-3xl text-red-500">404</p>
           <p className="text-lg">This blog post does not exist.</p>
-          <Link href={"/blog"} className="underline mt-5 text-[var(--active)] cursor-pointer">See blogposts</Link>
+          <Link
+            href={"/blog"}
+            className="underline mt-5 text-[var(--active)] cursor-pointer"
+          >
+            See blogposts
+          </Link>
         </div>
       );
     } else {
       return (
-        <div>
-          <p>placeholder for blogpost {id}</p>
+        <div
+          className="
+           px-10 py-10
+           md:px-30 md:py-15
+           xl:px-40 xl:py-20
+           "
+        >
+          <PostContent
+            title={post.title}
+            imgUrl={post.asset.url}
+            author={post.author}
+            content={post.content}
+            //   comments={areComments ? comments : []}
+            comments={comments}
+            commentsLength={commentsLength}
+          />
         </div>
       );
     }

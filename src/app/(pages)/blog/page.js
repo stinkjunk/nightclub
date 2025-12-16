@@ -45,7 +45,7 @@ export default function GetBlogposts() {
     <Suspense fallback={<Loading />}>
       <AppHeader />
       <main className="pattern-sm">
-        <PageHeadline title="Blog Post" />
+        <PageHeadline title="Blog" />
         <Blogposts />
       </main>
     </Suspense>
