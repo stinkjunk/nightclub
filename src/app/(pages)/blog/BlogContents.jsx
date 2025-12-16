@@ -86,10 +86,10 @@ export default function BlogContents(props) {
                   </div>
                   <Link
                     href={`/blog/posts/${post.id}`}
-                    className={`py-2 px-5 w-fit 
+                    className={`py-3 px-6 w-fit text-lg uppercase mx-auto md:mx-0
                         transition-colors duration-200 hover:text-[var(--active)]
                         ${
-                      isEven ? "ml-auto" : ""
+                      isEven ? "md:ml-auto" : ""
                     } mt-5 border-y-1`}
                   >
                     Read more
