@@ -85,7 +85,7 @@ export default function BlogContents(props) {
                     <p>{post.content}</p>
                   </div>
                   <Link
-                    href={`#`}
+                    href={`/blog/posts/${post.id}`}
                     className={`py-2 px-5 w-fit 
                         transition-colors duration-200 hover:text-[var(--active)]
                         ${
