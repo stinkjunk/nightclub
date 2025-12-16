@@ -7,7 +7,9 @@ import DropDown from "./DropDown";
 
 const ResponseMessage = ({ state }) => {
   return (
-    <>
+    <div
+      className="h-10 flex items-center"
+    >
       {state.success === true && (
         <p className="text-green-400 mb-2">Form sent successfully</p>
       )}
@@ -16,7 +18,7 @@ const ResponseMessage = ({ state }) => {
           Something went wrong, please try again
         </p>
       )}
-    </>
+    </div>
   );
 };
 
@@ -29,7 +31,7 @@ const SubmitButton = () => {
   return (
     <button
       type="submit"
-      className={`col-2 mt-5 uppercase ml-auto w-fit px-8 border-y-1 py-2 ${
+      className={`col-2 mt-5 uppercase ml-auto w-fit px-8 border-y-1 py-2 transition-colors duration-200 hover:text-[var(--active)] ${
         pending ? "opacity-50 cursor-not-allowed" : "cursor-pointer "
       }`}
       disabled={pending}
@@ -125,7 +127,7 @@ const BookTableForm = (props) => {
   return (
     <div className="">
       <ResponseMessage state={state} />
-      <form action={postProduct} className="grid grid-cols-2 gap-x-5 gap-y-4">
+      <form action={postProduct} className="grid grid-cols-2 gap-x-7 gap-y-6">
         {state.errors?.clientName && (
           <p className="text-rose-400 text-sm py-0.5 absolute transform -translate-y-[100%]">
             *{state.errors.clientName}
@@ -136,7 +138,9 @@ const BookTableForm = (props) => {
           name="date"
           className="hidden"
           placeholder={currentDate ? (reserved ? "reserved" : currentDate) : ""}
-          defaultValue={currentDate ? (reserved ? "reserved" : currentDate) : ""}
+          defaultValue={
+            currentDate ? (reserved ? "reserved" : currentDate) : ""
+          }
           // nok ikke en god idé i virkeligheden - du ville vitterligt kunne reservere et allerede
           // reserveret bord i dev tools ved at ændre værdien her. er klar over dette.
         ></input>
