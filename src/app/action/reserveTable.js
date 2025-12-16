@@ -1,6 +1,6 @@
 "use server";
 
-export const submitProduct = async (prevState, formData) => {
+export const reserveTable = async (prevState, formData) => {
   const clientName = formData.get("clientname");
   const clientEmail = formData.get("clientemail");
   const tableNumber = formData.get("tablenumber");

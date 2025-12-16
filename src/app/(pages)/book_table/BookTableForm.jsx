@@ -1,6 +1,6 @@
 "use client";
 import { useActionState } from "react";
-import { submitProduct } from "@/app/action/action";
+import { reserveTable } from "@/app/action/reserveTable";
 import { useFormStatus } from "react-dom";
 import { useSearchParams, useRouter } from "next/navigation";
 import DropDown from "./DropDown";
@@ -59,7 +59,7 @@ const BookTableForm = (props) => {
   // // console.log("Date data in BookTableForm:", dateData);
 
   // console.log("fetcheDates in BookTableForm:", props.fetchedDates);
-  const [state, postProduct] = useActionState(submitProduct, {
+  const [state, postProduct] = useActionState(reserveTable, {
     success: null,
     errors: {},
     fields: {},
