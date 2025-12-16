@@ -17,11 +17,12 @@ export default function DropDown(props) {
 
   //   const options = props.options;
 
-
   return (
     <div className="relative z-10">
       <div
-        className={`${props.passedStyle} flex overflow-hidden cursor-pointer items-center ${
+        className={`${
+          props.passedStyle
+        } flex overflow-hidden cursor-pointer items-center ${
           props.hasError ? "placeholder-red-400 text-red-400" : ""
         }`}
         onClick={() => setIsOpen(!isOpen)}
@@ -44,17 +45,20 @@ export default function DropDown(props) {
               className="pattern-sm"
             >
               {props.sentItems.map((sent, i) => {
-
                 const formatDate = (dateString) => {
-                  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                  const options = {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  };
                   const date = new Date(dateString);
-                  return date.toLocaleDateString(undefined, options);
-                }
-                
+                  return date.toLocaleDateString("en-US", options);
+                };
+
                 const params = new URLSearchParams(searchParams.toString());
                 params.set("date", sent);
                 const href = `/book_table?${params.toString()}`;
-              
+
                 return (
                   <Link
                     key={i}
