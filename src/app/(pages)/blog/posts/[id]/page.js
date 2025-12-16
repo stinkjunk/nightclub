@@ -56,11 +56,11 @@ async function Blogpost({ id }) {
     } else {
       return (
         <div
-          className="
-           px-10 py-10
-           md:px-30 md:py-15
-           xl:px-40 xl:py-20
-           "
+          // className="
+          //  px-10 py-10
+          //  md:px-30 md:py-15
+          //  xl:px-40 xl:py-20
+          //  "
         >
           <PostContent
             title={post.title}

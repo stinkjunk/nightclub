@@ -70,13 +70,13 @@ export default function Navbar() {
             <Link
               href="/blog"
               className={`uppercase text-xl transition-colors duration-200 ${
-                pathname == "/blog" ? "isCurrentPage" : "hover:text-[var(--active)]"
+                pathname.startsWith("/blog") ? "isCurrentPage" : "hover:text-[var(--active)]"
               }`}
             >
               Blog
             </Link>
 
-            {pathname == "/blog" && (
+            {pathname.startsWith("/blog") && (
               <div className="grid grid-cols-[1fr_1fr] w-full">
                 <div className="col-start-2">
                   <Image
