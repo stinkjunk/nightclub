@@ -22,8 +22,7 @@ export default async function Footer() {
   const compareDates = (isoString) => {
     const now = new Date();
     const past = new Date(isoString);
-    let diffMs = now.getTime() - past.getTime();
-    if (diffMs < 0) diffMs = 0; // guard against future dates
+    const diffMs = now.getTime() - past.getTime();
 
     const minuteMs = 1000 * 60;
     const hourMs = minuteMs * 60;
@@ -47,7 +46,6 @@ export default async function Footer() {
       return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`;
     }
 
-    // Calendar month difference for more accurate months/years
     const months =
       (now.getFullYear() - past.getFullYear()) * 12 +
       (now.getMonth() - past.getMonth());
