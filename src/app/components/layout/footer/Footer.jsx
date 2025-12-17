@@ -14,9 +14,6 @@ export default async function Footer() {
   const data = await fetchAPI(["/blogposts", "/comments"]);
   const posts = data["/blogposts"];
   const tweets = data["/comments"];
-
-  console.log("Fetched data in Footer component: ", data);
-
   const hasError = Boolean(posts?.[0]?.error) || Boolean(tweets?.[0]?.error);
 
   const hasPostsError = posts?.[0]?.error;
