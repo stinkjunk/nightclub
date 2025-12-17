@@ -78,7 +78,7 @@ export default function BlogContents(props) {
                   >
                     <h2 className="text-xl uppercase">{post.title}</h2>
                     <p className="font-bold text-[var(--active)] mb-2 md:mb-5">
-                      BY {post.author} / {postComments} comment
+                      BY: {post.author} / {postComments} comment
                       {postComments !== 1 ? "s" : ""}
                       {/*ingen dato inkluderet for blogposts i API, så kan ikke implementeres*/}
                     </p>

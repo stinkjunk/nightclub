@@ -67,7 +67,7 @@ export default function RecentBlog({ blogposts, comments }) {
 
                     <h3 className="text-lg font-bold">{post.title}</h3>
                     <p className="font-bold text-[var(--active)] mb-2 md:mb-5">
-                      BY {post.author} / {postComments} comment
+                      BY: {post.author} / {postComments} comment
                       {postComments !== 1 ? "s" : ""}
                       {/*ingen dato inkluderet for blogposts i API, så kan ikke implementeres*/}
                     </p>
