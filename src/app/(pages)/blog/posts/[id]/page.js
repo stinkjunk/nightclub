@@ -14,25 +14,19 @@ async function Blogpost({ id }) {
     `/comments?blogpostId=${id}`,
   ]);
   const post = data?.[`/blogposts/${id}`];
-
   const comments = data?.[`/comments?blogpostId=${id}`];
-  //   const areComments = Array.isArray(comments) && comments.length > 0;
-  const exists = Boolean(post && Object.keys(post).length);
+  
+  const hasError = Boolean(Array.isArray(post) && post[0]?.error);
+  const exists = Boolean(Object.keys(post).length > 0 && !hasError);
+  
   console.log("Fetched blogpost:", data);
   console.log("post: ", post);
-  console.log("imgUrl:", post.asset.url);
-
-  const commentsLength = comments.filter(
-    (comment) => comment.blogpostId == post.id
-  ).length;
-
-  //   console.log("Exists? ", exists);
-  //   console.log("Comments? ", areComments);
-  //   const data = await fetchAPI(["/blogposts"]);
-  //   console.log("Fetched blogpost: ", post);
-  //   console.log("Fetched blogposts:", data);
-  const hasError = Boolean(post?.[0]?.error);
   console.log("Has error?", hasError);
+  console.log("Exists?", exists);
+
+  const commentsLength = !hasError && exists && Array.isArray(comments) 
+    ? comments.filter((comment) => comment.blogpostId == post.id).length 
+    : 0;
 
   if (!hasError) {
     if (!exists) {
@@ -86,9 +80,9 @@ async function Blogpost({ id }) {
            "
       >
         <p className="text-lg">
-          Unable to load blogposts. Please try again later.
+          Unable to load blog post. Please try again later.
         </p>
-        <p className="mt-10 text-red-500">{post.error}</p>
+        <p className="mt-10 text-red-500">{post?.[0]?.error}</p>
         <p className="text-sm mt-10 opacity-70 italic">
           {"(Psst... har du husket at starte din server?)"}
         </p>

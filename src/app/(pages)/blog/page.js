@@ -28,10 +28,10 @@ async function Blogposts() {
          "
       >
         <p className="text-lg">
-          Unable to load blogposts. Please try again later.
+          Unable to load blog. Please try again later.
         </p>
         <p className="mt-10 text-red-500">
-          {data?.["/reservations"]?.[0]?.error}
+          {data?.["/blogposts"]?.[0]?.error}
         </p>
         <p className="text-sm mt-10 opacity-70 italic">
           {"(Psst... har du husket at starte din server?)"}
