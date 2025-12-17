@@ -10,12 +10,15 @@ import { FaInstagram } from "react-icons/fa";
 // ved ikke hvad der menes med tweets og "recent posts" i figma designet, da der ikke er korresponderende data i API'et.
 // derfor fetcher jeg bare blogposts for posts og comments for tweets:
 
-const data = await fetchAPI(["/blogposts", "/comments"]);
-const posts = data["/blogposts"];
-const tweets = data["/comments"];
+export default async function Footer() {
+  const data = await fetchAPI(["/blogposts", "/comments"]);
+  const posts = data["/blogposts"];
+  const tweets = data["/comments"];
 
-export default function Footer() {
+  console.log("Fetched data in Footer component: ", data);
+
   const hasError = Boolean(posts?.[0]?.error) || Boolean(tweets?.[0]?.error);
+
   const hasPostsError = posts?.[0]?.error;
   const hasTweetsError = tweets?.[0]?.error;
 
