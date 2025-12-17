@@ -1,13 +1,14 @@
 import Welcome from "./home/welcome/Welcome";
 import Events from "./home/events/Events";
 import Track from "./home/track/Track";
+import RecentBlog from "./home/recentblog/RecentBlog";
 import { fetchAPI } from "../utils/fetchAPI"; // utility function
 import Hero from "../components/layout/Hero";
 import { Suspense } from "react";
 import Loading from "../components/global/Loading";
 export default async function Home() {
   // const data = await fetchAPI(["/events", "/blogposts", "/comments", "/gallery"]);
-  const data = await fetchAPI(["/events"]);
+  const data = await fetchAPI(["/events", "/blogposts", "/comments"]);
   // console.log("Fetched data in Home page: ", data);
   return (
     <main>
@@ -15,8 +16,12 @@ export default async function Home() {
         <Hero />
         <Welcome />
         <Events events={data["/events"]} />
-        <Track />{" "}
+        <Track />
         {/* skaber problemer med animationer på welcome komponent - oh well, sikkert noget med vidstack */}
+        <RecentBlog
+          blogposts={data["/blogposts"]}
+          comments={data["/comments"]}
+        />
       </Suspense>
       {/* <Loading /> */}
     </main>

@@ -11,7 +11,7 @@ export default function Events({ events }) {
     bg-no-repeat
     "
     >
-      <Title title="Events of the Month" />
+      <Title title="Events of the Month" tag="h2" />
       <EventsClient events={events} />
     </section>
   );
