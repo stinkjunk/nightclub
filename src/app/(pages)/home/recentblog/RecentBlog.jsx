@@ -65,7 +65,7 @@ export default function RecentBlog({ blogposts, comments }) {
                       />
                     </div>
 
-                    <h3 className="text-lg font-bold">{post.title}</h3>
+                    <h3 className="text-xl uppercase">{post.title}</h3>
                     <p className="font-bold text-[var(--active)] mb-2 md:mb-5">
                       BY: {post.author} / {postComments} comment
                       {postComments !== 1 ? "s" : ""}
