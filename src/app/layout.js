@@ -11,6 +11,7 @@
 //   subsets: ["latin"],
 // });
 
+import Footer from "./components/layout/footer/Footer";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${ubuntu.variable} font-sans antialiased`}>
         {children}
+        <Footer />
       </body>
     </html>
   );
