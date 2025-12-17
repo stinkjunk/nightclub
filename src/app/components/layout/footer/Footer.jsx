@@ -6,7 +6,6 @@ import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa";
 import { FaSnapchatGhost } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { FaT } from "react-icons/fa6";
 
 // ved ikke hvad der menes med tweets og "recent posts" i figma designet, da der ikke er korresponderende data i API'et.
 // derfor fetcher jeg bare blogposts for posts og comments for tweets:
@@ -16,18 +15,27 @@ const posts = data["/blogposts"];
 const tweets = data["/comments"];
 
 export default function Footer() {
+  const hasError = Boolean(posts?.[0]?.error) || Boolean(tweets?.[0]?.error);
+  const hasPostsError = posts?.[0]?.error;
+  const hasTweetsError = tweets?.[0]?.error;
+
   const compareDates = (isoString) => {
     const now = new Date();
     const past = new Date(isoString);
     let diffMs = now.getTime() - past.getTime();
     if (diffMs < 0) diffMs = 0; // guard against future dates
 
-    const hourMs = 1000 * 60 * 60;
+    const minuteMs = 1000 * 60;
+    const hourMs = minuteMs * 60;
     const dayMs = hourMs * 24;
 
+    const diffMinutes = Math.floor(diffMs / minuteMs);
     const diffHours = Math.floor(diffMs / hourMs);
     const diffDays = Math.floor(diffMs / dayMs);
 
+    if (diffHours < 1) {
+      return `${diffMinutes} ${diffMinutes === 1 ? "minute" : "minutes"} ago`;
+    }
     if (diffHours < 24) {
       return `${diffHours} ${diffHours === 1 ? "hour" : "hours"} ago`;
     }
@@ -40,7 +48,9 @@ export default function Footer() {
     }
 
     // Calendar month difference for more accurate months/years
-    const months = (now.getFullYear() - past.getFullYear()) * 12 + (now.getMonth() - past.getMonth());
+    const months =
+      (now.getFullYear() - past.getFullYear()) * 12 +
+      (now.getMonth() - past.getMonth());
     if (months < 12) {
       return `${months} ${months === 1 ? "month" : "months"} ago`;
     }
@@ -82,86 +92,110 @@ export default function Footer() {
           </p>
         </div>
       </div>
-      <div className="hidden xl:grid xl:col-span-2 gap-20 h-full grid-cols-2 mb-50">
-        <div>
-          <p className="uppercase text-xl text-[var(--active)] font-medium">
-            Recent Posts
+      {hasError ? (
+        <div className="hidden xl:block xl:col-span-2 gap-20 h-full h-70 mb-50">
+          <p className="text-lg">
+            Unable to load posts and tweets preview in footer.
           </p>
-          <div className="gap-10 my-5 flex flex-col">
-            {posts
-              .slice(-2)
-              .reverse()
-              .map((post, i) => {
-                return (
-                  <div key={i} className="flex h-30">
-                    <Link
-                      className="relative h-30 w-30 flex-shrink-0 cursor-pointer"
-                      href={`/blog/posts/${post.id}`}
-                    >
-                      <Image
-                        src={post.asset.url}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
+          {hasPostsError && (
+            <p className="mt-10 text-red-500">{posts[0].error}</p>
+          )}
+          {hasTweetsError && (
+            <p className="mt-5 text-red-500">{tweets[0].error}</p>
+          )}
+          <p className="text-sm mt-10 opacity-70 italic">
+            {"(Psst... har du husket at starte din server?)"}
+          </p>
+        </div>
+      ) : (
+        <div className="hidden xl:grid xl:col-span-2 gap-20 h-full grid-cols-2 mb-50">
+          <div>
+            <p className="uppercase text-xl text-[var(--active)] font-medium">
+              Recent Posts
+            </p>
+            <div className="gap-10 my-5 flex flex-col">
+              {posts
+                .slice(-2)
+                .reverse()
+                .map((post, i) => {
+                  return (
+                    <div key={i} className="flex h-30">
+                      <Link
+                        className="relative h-30 w-30 flex-shrink-0 cursor-pointer"
+                        href={`/blog/posts/${post.id}`}
+                      >
+                        <Image
+                          src={post.asset.url}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </Link>
+                      <div className="flex flex-col flex-grow ml-6">
+                        <div
+                          className="flex-grow overflow-hidden relative"
+                          style={{
+                            maskImage:
+                              "linear-gradient(to bottom, black 80%, transparent 100%)",
+                            WebkitMaskImage:
+                              "linear-gradient(to bottom, black 80%, transparent 100%)",
+                          }}
+                        >
+                          <p className="break-words flex-grow">
+                            {post.content}
+                          </p>
+                        </div>
+                        <p className="text-[var(--active)] my-2">
+                          Post is not dated
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div>
+            <p className="uppercase text-xl text-[var(--active)] font-medium">
+              Recent Tweets
+            </p>
+            <div className="gap-10 my-5 flex flex-col">
+              {tweets
+                .slice(-2)
+                .reverse()
+                .map((tweet, i) => {
+                  return (
+                    <div key={i} className="flex h-30 relative">
+                      <FaTwitter
+                        size={25}
+                        className="text-[var(--active)] absolute"
                       />
-                    </Link>
-                    <div className="flex flex-col flex-grow ml-6">
-                      <div
-                        className="flex-grow overflow-hidden relative"
-                        style={{
-                          maskImage:
-                            "linear-gradient(to bottom, black 80%, transparent 100%)",
-                          WebkitMaskImage:
-                            "linear-gradient(to bottom, black 80%, transparent 100%)",
-                        }}
-                      >
-                        <p className="break-words flex-grow">{post.content}</p>
+                      <div className="flex flex-col flex-grow ml-6 ml-10">
+                        <div
+                          className="flex-grow overflow-hidden relative"
+                          style={{
+                            maskImage:
+                              "linear-gradient(to bottom, black 80%, transparent 100%)",
+                            WebkitMaskImage:
+                              "linear-gradient(to bottom, black 80%, transparent 100%)",
+                          }}
+                        >
+                          <p className="break-words flex-grow">
+                            {tweet.content}
+                          </p>
+                        </div>
+                        <p className="text-[var(--active)] my-2">
+                          {compareDates(tweet.date)}
+                        </p>
                       </div>
-                      <p className="text-[var(--active)] my-2">
-                        Post is not dated
-                      </p>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
           </div>
         </div>
-        <div>
-          <p className="uppercase text-xl text-[var(--active)] font-medium">
-            Recent Tweets
-          </p>
-          <div className="gap-10 my-5 flex flex-col">
-            {tweets
-              .slice(-2)
-              .reverse()
-              .map((tweet, i) => {
-                return (
-                  <div key={i} className="flex h-30">
-                    <FaTwitter size={25} className="text-[var(--active)] w-50"/>
-                    <div className="flex flex-col flex-grow ml-6">
-                      <div
-                        className="flex-grow overflow-hidden relative"
-                        style={{
-                          maskImage:
-                            "linear-gradient(to bottom, black 80%, transparent 100%)",
-                          WebkitMaskImage:
-                            "linear-gradient(to bottom, black 80%, transparent 100%)",
-                        }}
-                      >
-                        <p className="break-words flex-grow">{tweet.content}</p>
-                      </div>
-                      <p className="text-[var(--active)] my-2">
-                        {compareDates(tweet.date)}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </div>
-      </div>
+      )}
       <div className="xl:col-start-1 xl:col-span-3 xl:grid grid-cols-3">
-        <div className="grid grid-cols-3 xl:gap-x-10 col-start-2">
+        <div className="grid grid-cols-3 xl:gap-x-10 mx-10 md:mx-60 xl:mx-0 col-start-2">
           <p className="col-span-3 w-full text-center mb-5">
             Stay Connected With Us
           </p>
@@ -185,10 +219,10 @@ export default function Footer() {
             <FaInstagram size={30} />
           </Link>
         </div>
-        <p className=" w-full text-center xl:text-left row-start-1 mt-10 xl:mt-0 xl:pr-5">
+        <p className=" w-full text-center xl:text-left row-start-1 mt-10 xl:my-auto xl:pr-5">
           Night Club PSD Template - All Rights Reserved
         </p>
-        <p className="w-full text-center xl:text-right xl:pl-5">
+        <p className="w-full text-center xl:text-right xl:my-auto xl:pl-5">
           Copyright © NightClub
         </p>
       </div>
