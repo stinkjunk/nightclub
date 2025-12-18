@@ -200,20 +200,20 @@ export default async function Footer() {
           <div className="flex justify-center gap-5">
             <Link
               href="#"
-              className="outline-1 h-15 w-15 flex items-center justify-center"
+              className="outline-1 h-15 w-15 flex items-center justify-center hover:bg-[var(--text)] hover:text-[var(--bg)] transition-colors duration-200"
             >
               <FaFacebookF size={30} />
             </Link>
 
             <Link
               href="#"
-              className="outline-1 h-15 w-15 flex items-center justify-center"
+              className="outline-1 h-15 w-15 flex items-center justify-center hover:bg-[var(--text)] hover:text-[var(--bg)] transition-colors duration-200"
             >
               <FaSnapchatGhost size={30} />
             </Link>
             <Link
               href="#"
-              className="outline-1 h-15 w-15 flex items-center justify-center"
+              className="outline-1 h-15 w-15 flex items-center justify-center hover:bg-[var(--text)] hover:text-[var(--bg)] transition-colors duration-200"
             >
               <FaInstagram size={30} />
             </Link>
