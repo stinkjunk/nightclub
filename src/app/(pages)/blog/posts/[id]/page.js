@@ -19,10 +19,10 @@ async function Blogpost({ id }) {
   const hasError = Boolean(Array.isArray(post) && post[0]?.error);
   const exists = Boolean(Object.keys(post).length > 0 && !hasError);
   
-  console.log("Fetched blogpost:", data);
-  console.log("post: ", post);
-  console.log("Has error?", hasError);
-  console.log("Exists?", exists);
+  // console.log("Fetched blogpost:", data);
+  // console.log("post: ", post);
+  // console.log("Has error?", hasError);
+  // console.log("Exists?", exists);
 
   const commentsLength = !hasError && exists && Array.isArray(comments) 
     ? comments.filter((comment) => comment.blogpostId == post.id).length 
