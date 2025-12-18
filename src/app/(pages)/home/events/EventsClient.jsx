@@ -1,5 +1,5 @@
 "use client";
-import { useState /*useEffect*/ } from "react";
+import { useState  } from "react";
 import EventSlide from "./EventSlide";
 import { motion } from "motion/react";
 
@@ -9,29 +9,6 @@ export default function EventsClient({ events }) {
   const entries = events;
   const hasError = entries?.[0]?.error;
 
-  // useEffect(() => {
-  //   const checkMobile = () => {
-  //     const newIsMobile = window.matchMedia("(max-width: 767px)").matches;
-
-  //     if (newIsMobile !== isMobile) {
-  //       if (newIsMobile) {
-  //         const newSlide = (currentSlide - 1) * 2 + 1;
-  //         setCurrentSlide(newSlide);
-  //       } else {
-  //         const newSlide = Math.ceil(currentSlide / 2);
-  //         setCurrentSlide(newSlide);
-  //       }
-  //     }
-
-  //     setIsMobile(newIsMobile);
-  //   };
-
-  //   checkMobile();
-  //   window.addEventListener("resize", checkMobile);
-  //   return () => window.removeEventListener("resize", checkMobile);
-  // }, [isMobile, currentSlide]);
-
-  // const slideCount = isMobile ? entries.length : Math.ceil(entries.length / 2);
   const slideCount = Math.ceil(entries.length / 2);
   const mobileSlideCount = entries.length;
 
@@ -69,7 +46,6 @@ export default function EventsClient({ events }) {
               img={entry.asset.url}
               date={entry.date}
               location={entry.location}
-              // isMobile={isMobile}
             />
           ))}
         </motion.div>
