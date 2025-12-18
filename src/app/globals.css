@@ -72,21 +72,6 @@ body {
 
 .isCurrentPage {
   color: var(--active);
-
-  /* This is incredibly painful*/
-  /* background-image: url("/assets/bottom_line2.png");
-  &::before {
-    content: "";
-    overflow: visible;
-    position: absolute;
-    width: 15vw;
-    height: 2ch;
-    transform: translateY(120%) translateX(-50%);
-    background-image: url("/assets/bottom_line2.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  } */
 }
 
 .hoverPinkLine {
