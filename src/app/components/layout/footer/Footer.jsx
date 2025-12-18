@@ -193,29 +193,31 @@ export default async function Footer() {
         </div>
       )}
       <div className="xl:col-start-1 xl:col-span-3 xl:grid grid-cols-3">
-        <div className="grid grid-cols-3 xl:gap-x-10 mx-10 md:mx-60 xl:mx-0 col-start-2">
+        <div className=" mx-10 md:mx-60 xl:mx-0 col-start-2">
           <p className="col-span-3 w-full text-center mb-5">
             Stay Connected With Us
           </p>
-          <Link
-            href="#"
-            className="outline-1 h-15 w-15 ml-auto flex items-center justify-center"
-          >
-            <FaFacebookF size={30} />
-          </Link>
+          <div className="flex justify-center gap-5">
+            <Link
+              href="#"
+              className="outline-1 h-15 w-15 flex items-center justify-center"
+            >
+              <FaFacebookF size={30} />
+            </Link>
 
-          <Link
-            href="#"
-            className="outline-1 h-15 w-15 mx-auto flex items-center justify-center"
-          >
-            <FaSnapchatGhost size={30} />
-          </Link>
-          <Link
-            href="#"
-            className="outline-1 h-15 w-15 mr-auto flex items-center justify-center"
-          >
-            <FaInstagram size={30} />
-          </Link>
+            <Link
+              href="#"
+              className="outline-1 h-15 w-15 flex items-center justify-center"
+            >
+              <FaSnapchatGhost size={30} />
+            </Link>
+            <Link
+              href="#"
+              className="outline-1 h-15 w-15 flex items-center justify-center"
+            >
+              <FaInstagram size={30} />
+            </Link>
+          </div>
         </div>
         <p className=" w-full text-center xl:text-left row-start-1 mt-10 xl:my-auto xl:pr-5">
           Night Club PSD Template - All Rights Reserved
