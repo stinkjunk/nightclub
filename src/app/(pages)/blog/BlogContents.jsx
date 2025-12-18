@@ -10,7 +10,7 @@ export default function BlogContents(props) {
   const pages = blogposts.length === 0 ? 1 : Math.ceil(blogposts.length / 3); // 3 blogposts per side
   // failsafe hvis ingen blogposts eksisterer - kan ikke dividere med 0
 
-  console.log("pages in BlogContents component:", pages);
+  // console.log("pages in BlogContents component:", pages);
   // console.log("blogposts in BlogContents component:", blogposts);
   // console.log("comments in BlogContents component:", comments);
   const [currentPage, setCurrentPage] = useState(1);

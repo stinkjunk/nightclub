@@ -7,8 +7,8 @@ import BlogContents from "./BlogContents";
 
 async function Blogposts() {
   const data = await fetchAPI(["/blogposts", "/comments"]);
-  console.log("Fetched blogposts:", data);
-  console.log("Fetched comments:", data["/comments"]);
+  // console.log("Fetched blogposts:", data);
+  // console.log("Fetched comments:", data["/comments"]);
   const hasError = Boolean(data?.["/blogposts"]?.[0]?.error);
 
   if (!hasError) {
