@@ -1,5 +1,5 @@
 "use client";
-import { useState /* useEffect */ } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,48 +7,8 @@ import Link from "next/link";
 export default function EventSlide(props) {
   const [isHovered, setIsHovered] = useState(false);
   const [isShowing, setIsShowing] = useState(false);
-  // const [activeCard, setActiveCard] = useState(null);
-  // const { isMobile } = props;
-  // // const { index } = props;
-  // //isMobile state passet fra EventsContent.jsx som prop - behøver ikke
-  // //at gendefinere det her
 
-  // const handleClick = () => {
-  //   // Toggle on click for mobile only
-  //   // console.log("Clicked on card ", index);
-  //   // setActiveCard(index);
 
-  //   setIsHovered(!isHovered);
-  // };
-
-  // ikke bruge useEffect - forstår ikke kravet, da jeg ikke bruger useEffect til fetching/ting der kunne klares
-  // på server; useEffect ser ud til at være måden at interagere med DOM, men gør som bliver sagt.
-
-  // "Effects are an escape hatch from the React paradigm. They let you “step outside” of React and synchronize your
-  // components with some external system like a non-React widget, network, or the browser DOM."
-  // officiel react dokumentation: https://react.dev/learn/you-might-not-need-an-effect
-  // https://dev.to/hkp22/reacts-useeffect-best-practices-pitfalls-and-modern-javascript-insights-g2f
-
-  // useEffect(
-  //   () => {
-  //     // Close when clicking outside (mobile only) AI
-  //     if (!isMobile) return;
-
-  //     const handleClickOutside = () => setIsHovered(false);
-
-  //     if (isHovered) {
-  //       document.addEventListener("click", handleClickOutside);
-  //       return () => document.removeEventListener("click", handleClickOutside);
-  //       //cleanup, fjerner event listener
-  //       //react opbevarer cleanup funktionen og kalder den når isHovered ændres
-  //       //return () kører når !isHovered
-  //     }
-  //   },
-  //   [isHovered, isMobile]
-  //   //
-  // );
-
-  //filter date:
   const date = new Date(props.date);
   const formattedDate = date.toLocaleDateString("en-US", {
     day: "numeric",
@@ -78,6 +38,8 @@ export default function EventSlide(props) {
           onClick={() => {
             if (isHovered) return; // desktop: don't toggle while hovered
             setIsShowing((prev) => !prev); // mobile: toggle on tap
+            // i stedet for denne løsning, kunne det måske gøres igennem CSS media queries og hover classes som kun er valide baseret på
+            // sagte media queries..
           }}
         >
           <motion.div 
